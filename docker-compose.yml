@@ -15,7 +15,7 @@ services:
         ports:
             - '5432:5432'
         volumes:
-            - .:/var/lib/postgresql/data
+            - .postgres:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: stock
             POSTGRES_PASSWORD: stockapp
