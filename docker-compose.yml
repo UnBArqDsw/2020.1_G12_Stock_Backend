@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+    app:
+        build: .
+        command: npm start
+        ports: 
+            - "3000:3000"
+        volumes:
+            - .:/usr/app
+
+
+    postgres:
+        image: postgres:13
+        ports:
+            - '5432:5432'
+        volumes:
+            - .:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: stock
+            POSTGRES_PASSWORD: stockapp
+            POSTGRES_DB: stock
