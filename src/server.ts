@@ -1,9 +1,5 @@
-import express, { Response, Request } from 'express'
+import app from './app'
 
-const PORT = 3000
+const PORT = 8000
 const HOST = '0.0.0.0'
-const app = express()
-app.get('/', (req: Response, res: Request) => {
-  res.send('teste')
-})
 app.listen(PORT, HOST)
