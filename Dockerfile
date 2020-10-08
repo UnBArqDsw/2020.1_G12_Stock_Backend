@@ -2,8 +2,6 @@ FROM node:alpine
 
 WORKDIR /usr/app
 
-RUN mkdir ./postgres
-
 COPY package*.json ./
 RUN npm install
 

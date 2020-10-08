@@ -6,8 +6,6 @@ services:
         command: npm start
         ports: 
             - "3000:3000"
-        volumes:
-            - .:/usr/app
 
 
     postgres:
@@ -15,7 +13,7 @@ services:
         ports:
             - '5432:5432'
         volumes:
-            - .postgres:/var/lib/postgresql/data
+            - ./postgres:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: stock
             POSTGRES_PASSWORD: stockapp
