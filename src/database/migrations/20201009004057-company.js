@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false
       },
       photo: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(8000),
         allowNull: false
       },
       maxQtdCollaborator: {
@@ -40,7 +40,7 @@ module.exports = {
       },
       idBranch: {
         type: Sequelize.INTEGER,
-        refences: {
+        references: {
           model: 'branches',
           key: 'idBranch'
         },
