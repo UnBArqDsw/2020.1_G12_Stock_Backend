@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('feedback_types', { 
+    await queryInterface.createTable('feedback_types', {
       idFeedbackType: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      name:{
+      name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-      description:{
+      description: {
         type: Sequelize.STRING(1000),
         allowNull: false
       },
@@ -25,10 +25,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
-    });
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('feedback_types');
+    await queryInterface.dropTable('feedback_types')
   }
-};
+}

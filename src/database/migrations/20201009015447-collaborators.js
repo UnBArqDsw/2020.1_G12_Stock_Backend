@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('collaborators', { 
+    await queryInterface.createTable('collaborators', {
       idCollaborator: {
-        type:Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
@@ -12,7 +12,7 @@ module.exports = {
       idAccessLevel: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
+        references: {
           model: 'access_levels',
           key: 'idAccessLevel'
         }
@@ -20,7 +20,7 @@ module.exports = {
       idCompany: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
+        references: {
           model: 'companies',
           key: 'idCompany'
         }
@@ -40,7 +40,7 @@ module.exports = {
       },
       photo: {
         type: Sequelize.STRING(8000),
-        allowNull: true,
+        allowNull: true
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -50,10 +50,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
-    });
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('collaborators');
+    await queryInterface.dropTable('collaborators')
   }
-};
+}

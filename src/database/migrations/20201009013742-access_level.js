@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -15,7 +15,7 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -25,11 +25,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
-    });
+    })
   },
 
-
   down: async (queryInterface, Sequelize) => {
-     await queryInterface.dropTable('access_levels');
+    await queryInterface.dropTable('access_levels')
   }
-};
+}
