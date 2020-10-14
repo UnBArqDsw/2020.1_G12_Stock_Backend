@@ -1,15 +1,15 @@
 import { CollaboratorFactory, Collaborator } from './Collaborator'
 
 export class OwnerFactory extends CollaboratorFactory {
-  public factoryMethod(): Collaborator {
+  public factoryMethod (): Collaborator {
     return new Owner()
   }
 }
 
-/* Usuários Concretos */ 
+/* Usuários Concretos */
 
 class Owner implements Collaborator {
-  public getUserData() {
+  public getUserData () {
     const userData = {
       name: 'João',
       password: '123456',
@@ -21,8 +21,8 @@ class Owner implements Collaborator {
   }
 }
 
-/* Recebe uma fábrica */ 
-function clientCode(CollaboratorFactory) {
+/* Recebe uma fábrica */
+function clientCode (CollaboratorFactory) {
   console.log(CollaboratorFactory.someOperation())
 }
 

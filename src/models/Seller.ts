@@ -3,28 +3,27 @@ import { CollaboratorFactory, Collaborator } from './Collaborator'
 /* Fábrica dos Usuários */
 
 export class SellerFactory extends CollaboratorFactory {
-
-    public factoryMethod(): Collaborator {
-        return new Seller()
-    }
+  public factoryMethod (): Collaborator {
+    return new Seller()
+  }
 }
 
 class Seller implements Collaborator {
-    public getUserData() {
-        const userData = {
-            name: 'João',
-            password: '123456',
-            document: '00123',
-            acessLevel: 'seller',
-            photo: 'url1'
-        }
-
-        return userData
+  public getUserData () {
+    const userData = {
+      name: 'João',
+      password: '123456',
+      document: '00123',
+      acessLevel: 'seller',
+      photo: 'url1'
     }
+
+    return userData
+  }
 }
 
-function clientCode(CollaboratorFactory) {
-    console.log(CollaboratorFactory.someOperation())
+function clientCode (CollaboratorFactory) {
+  console.log(CollaboratorFactory.someOperation())
 }
 
 clientCode(new SellerFactory())
