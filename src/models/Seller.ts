@@ -1,28 +1,54 @@
 import { CollaboratorFactory, Collaborator } from './Collaborator'
+import {
+  Sequelize,
+  Model,
+  DataTypes,
+} from "sequelize";
+import database from '../database'
 
-/* Fábrica dos Usuários */
+const sequelize = new Sequelize("mysql://root:asd123@localhost:5432/mydb");
 
 export class SellerFactory extends CollaboratorFactory {
-  public factoryMethod (): Collaborator {
+  public factoryMethod(): Collaborator {
     return new Seller()
   }
 }
 
-class Seller implements Collaborator {
-  public getUserData () {
-    const userData = {
-      name: 'João',
-      password: '123456',
-      document: '00123',
-      acessLevel: 'seller',
-      photo: 'url1'
-    }
+/* Usuários Concretos */
 
-    return userData
-  }
+export class Seller implements Collaborator {
+  public idCollaborator!: number
+  public idAcessLevel: number
+  public idCompany: number
+
+  public name: string
+  public password: string
+  public document: string
+  public accessLevel: string
+  public photo: string
+
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+  static init: any;
 }
 
-function clientCode (CollaboratorFactory) {
+Seller.init(
+  {
+ 
+    name: Sequelize.STRING,
+    password: Sequelize.STRING,
+    document: Sequelize.STRING,
+    accessLevel: Sequelize.STRING,
+    photo: Sequelize.STRING,
+  },
+  {
+    sequelize: database.connection,
+    freezeTableName: true,
+  }
+);
+
+/* Recebe uma fábrica */
+function clientCode(CollaboratorFactory) {
   console.log(CollaboratorFactory.someOperation())
 }
 
