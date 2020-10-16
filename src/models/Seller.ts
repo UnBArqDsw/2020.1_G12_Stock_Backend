@@ -1,22 +1,16 @@
 import { CollaboratorFactory, Collaborator } from './Collaborator'
-import {
-  Sequelize,
-  Model,
-  DataTypes,
-} from "sequelize";
+import Sequelize, { Model } from 'sequelize'
 import database from '../database'
 
-const sequelize = new Sequelize("mysql://root:asd123@localhost:5432/mydb");
-
 export class SellerFactory extends CollaboratorFactory {
-  public factoryMethod(): Collaborator {
+  public factoryMethod (): Collaborator {
     return new Seller()
   }
 }
 
 /* Usuários Concretos */
 
-export class Seller implements Collaborator {
+export class Seller extends Model implements Collaborator {
   public idCollaborator!: number
   public idAcessLevel: number
   public idCompany: number
@@ -34,21 +28,21 @@ export class Seller implements Collaborator {
 
 Seller.init(
   {
- 
+
     name: Sequelize.STRING,
     password: Sequelize.STRING,
     document: Sequelize.STRING,
     accessLevel: Sequelize.STRING,
-    photo: Sequelize.STRING,
+    photo: Sequelize.STRING
   },
   {
     sequelize: database.connection,
-    freezeTableName: true,
+    freezeTableName: true
   }
-);
+)
 
 /* Recebe uma fábrica */
-function clientCode(CollaboratorFactory) {
+function clientCode (CollaboratorFactory) {
   console.log(CollaboratorFactory.someOperation())
 }
 

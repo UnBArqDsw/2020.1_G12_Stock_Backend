@@ -6,23 +6,23 @@ import './database'
 
 class App {
   app: any
-  constructor() {
+  constructor () {
     this.app = express()
     this.init()
     this.middlewares()
     this.routes()
   }
 
-  init(): void {
+  init (): void {
     this.app.use(express.json())
     this.app.use(cors())
   }
-  middlewares() { }
 
-  routes() {
+  middlewares () { }
+
+  routes () {
     setRoutes(this.app)
   }
-
 }
 
 export default new App().app
