@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,24 +7,24 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    return await queryInterface.dropTable('branches')
-  }
-}
+  down: async (queryInterface) => {
+    return await queryInterface.dropTable('branches');
+  },
+};

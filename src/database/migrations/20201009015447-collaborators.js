@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,53 +7,53 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       idAccessLevel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'access_levels',
-          key: 'idAccessLevel'
-        }
+          key: 'idAccessLevel',
+        },
       },
       idCompany: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'companies',
-          key: 'idCompany'
-        }
+          key: 'idCompany',
+        },
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       document: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       passsword: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       photo: {
         type: Sequelize.STRING(8000),
-        allowNull: true
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('collaborators')
-  }
-}
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('collaborators');
+  },
+};

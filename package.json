@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --check ./src",
+    "format:fix": "prettier --write ./src",
     "lint": "eslint --ext .js,.ts,.tsx src/",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec sucrase-node src/server.js"
@@ -22,12 +24,15 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.13.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
     "sucrase": "^3.16.0"
   }
 }

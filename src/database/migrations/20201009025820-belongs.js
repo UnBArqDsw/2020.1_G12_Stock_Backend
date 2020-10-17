@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -8,29 +8,29 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'categories',
-          key: 'idCategory'
-        }
+          key: 'idCategory',
+        },
       },
       idProduct: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'products',
-          key: 'idProduct'
-        }
+          key: 'idProduct',
+        },
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('belongs')
-  }
-}
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('belongs');
+  },
+};

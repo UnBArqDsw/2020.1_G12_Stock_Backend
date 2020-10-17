@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,59 +7,59 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
       document: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       telephone: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       photo: {
         type: Sequelize.STRING(8000),
-        allowNull: false
+        allowNull: false,
       },
       maxQtdCollaborator: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       registerDate: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       idBranch: {
         type: Sequelize.INTEGER,
         references: {
           model: 'branches',
-          key: 'idBranch'
+          key: 'idBranch',
         },
         allowNull: false,
         onUpdate: 'RESTRICT',
-        onDelete: 'RESTRICT'
+        onDelete: 'RESTRICT',
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    return await queryInterface.dropTable('companies')
-  }
-}
+  down: async (queryInterface) => {
+    return await queryInterface.dropTable('companies');
+  },
+};

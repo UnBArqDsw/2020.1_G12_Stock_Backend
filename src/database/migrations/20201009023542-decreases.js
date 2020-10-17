@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -8,41 +8,41 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'collaborators',
-          key: 'idCollaborator'
-        }
+          key: 'idCollaborator',
+        },
       },
       idLot: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'lots',
-          key: 'idLot'
-        }
+          key: 'idLot',
+        },
       },
       quantity: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       date: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       time: {
         type: Sequelize.TIME,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('decreases')
-  }
-}
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('decreases');
+  },
+};

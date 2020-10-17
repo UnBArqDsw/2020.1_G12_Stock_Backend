@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,44 +7,44 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       idFeedbackType: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'feedback_types',
-          key: 'idFeedbackType'
-        }
+          key: 'idFeedbackType',
+        },
       },
       idCollaborator: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'collaborators',
-          key: 'idCollaborator'
-        }
+          key: 'idCollaborator',
+        },
       },
       description: {
         type: Sequelize.STRING(1000),
-        allowNull: false
+        allowNull: false,
       },
       annex: {
         type: Sequelize.STRING(8000),
-        allowNull: true
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
-      }
-    })
+        allowNull: false,
+      },
+    });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('feedbacks')
-  }
-}
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('feedbacks');
+  },
+};

@@ -1,14 +1,14 @@
-import Sequelize from 'sequelize'
-import databaseConfig from '../config/database'
+import Sequelize from 'sequelize';
+import databaseConfig from '../config/database';
 
 class Database {
-  constructor () {
-    this.init()
+  constructor() {
+    this.init();
   }
 
-  init () {
-    this.connection = new Sequelize(databaseConfig)
+  init() {
+    this.connection = new Sequelize(databaseConfig);
   }
 }
 
-export default new Database()
+export default new Database();

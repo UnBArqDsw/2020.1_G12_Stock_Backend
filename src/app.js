@@ -1,18 +1,18 @@
-import 'dotenv/config'
-import express from 'express'
-import './database'
+import 'dotenv/config';
+import express from 'express';
+import './database';
 
 class App {
-  constructor () {
-    this.app = express()
-    this.init()
+  constructor() {
+    this.app = express();
+    this.init();
   }
 
-  init () {
+  init() {
     this.app.use('/', (req, res) => {
-      res.send('teste')
-    })
+      res.send('teste');
+    });
   }
 }
 
-export default new App().app
+export default new App().app;
