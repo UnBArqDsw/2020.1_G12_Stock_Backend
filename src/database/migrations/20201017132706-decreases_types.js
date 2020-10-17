@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('decreases_types', {
-      idDecreasesTypes:{
+      idDecreasesTypes: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
       },
-      name:{
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description:{
+      description: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -25,10 +25,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
-    });
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('decreases_types');
+    await queryInterface.dropTable('decreases_types')
   }
-};
+}
