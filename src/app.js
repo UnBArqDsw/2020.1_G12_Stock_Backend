@@ -8,7 +8,7 @@ class App {
     this.init()
   }
 
-  init (): void {
+  init () {
     this.app.use('/', (req, res) => {
       res.send('teste')
     })
