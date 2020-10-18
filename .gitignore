@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 postgres
+package-lock.json
+yarn.lock
