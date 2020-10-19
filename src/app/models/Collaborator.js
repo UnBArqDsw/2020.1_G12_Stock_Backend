@@ -16,7 +16,7 @@ class CollaboratorModel extends Model {
         idCompany: Sequelize.NUMBER,
         name: Sequelize.STRING,
         document: Sequelize.STRING,
-        passsword: Sequelize.STRING,
+        password: Sequelize.STRING,
         photo: Sequelize.STRING,
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
@@ -24,8 +24,8 @@ class CollaboratorModel extends Model {
       { sequelize: connection, tableName: 'collaborators' }
     );
     this.addHook('beforeSave', async (collaborator) => {
-      if (collaborator.passsword) {
-        collaborator.passsword = await hashPass(collaborator.passsword);
+      if (collaborator.password) {
+        collaborator.password = await hashPass(collaborator.password);
       }
     });
 
@@ -42,8 +42,8 @@ class CollaboratorModel extends Model {
     });
   }
 
-  verifyPassword(passsword) {
-    return compare(passsword, this.passsword);
+  verifyPassword(password) {
+    return compare(password, this.password);
   }
   generateJWT() {
     const payload = {
