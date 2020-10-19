@@ -18,12 +18,15 @@ class ColaboratorBase extends Base {
 
   async auth(document, password) {
     const collaborator = await super.findOne({ where: { document } });
+    if (!collaborator)
+      throw { status: 401, message: 'Verifique seu documento e senha' };
+
     const isPasswordValid = await collaborator.verifyPassword(password);
 
     if (isPasswordValid) {
       return { collaborator, token: collaborator.generateJWT() };
     } else {
-      throw { status: 401, message: 'Verifique seu email e senha' };
+      throw { status: 401, message: 'Verifique seu documento e senha' };
     }
   }
 }
