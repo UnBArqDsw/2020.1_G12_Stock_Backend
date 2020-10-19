@@ -5,21 +5,21 @@ class Base {
   }
 
   async create(data) {
-    const respose = await this.modelBase.create(data);
-    return respose;
+    const response = await this.modelBase.create(data);
+    return response;
   }
 
-  async finOne(data) {
-    const respose = await this.modelBase.finOne(data);
-    return respose;
+  async findOne(data) {
+    const response = await this.modelBase.findOne(data);
+    return response;
   }
   async findAll(data) {
-    const respose = await this.modelBase.findAll(data);
-    return respose;
+    const response = await this.modelBase.findAll(data);
+    return response;
   }
   async update(data) {
-    const respose = await this.modelBase.update(data);
-    return respose;
+    const response = await this.modelBase.update(data);
+    return response;
   }
 }
 
