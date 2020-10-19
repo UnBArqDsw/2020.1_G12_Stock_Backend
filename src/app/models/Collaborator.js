@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import hashPass from '../../utils/hashPass';
+import { compare } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 class CollaboratorModel extends Model {
   static init(connection) {
@@ -38,6 +40,20 @@ class CollaboratorModel extends Model {
       foreignKey: 'idCompany',
       as: 'Company',
     });
+  }
+
+  verifyPassword(passsword) {
+    return compare(passsword, this.passsword);
+  }
+  generateJWT() {
+    const payload = {
+      idCollaborator: this.idCollaborator,
+      idCompany: this.idCompany,
+      idAccessLevel: this.idAccessLevel,
+      document: this.document,
+      name: this.name,
+    };
+    return jwt.sign(payload, process.env.PRIVATE_KEY);
   }
 }
 
