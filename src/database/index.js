@@ -7,6 +7,7 @@ import CompanyModel from '../app/models/Company';
 import ProductModel from '../app/models/Product';
 import LotModel from '../app/models/Lot';
 import CategoryModel from '../app/models/Category';
+import BelongsModel from '../app/models/Belongs';
 
 const models = [
   BranchModel,
@@ -16,6 +17,7 @@ const models = [
   ProductModel,
   LotModel,
   CategoryModel,
+  BelongsModel,
 ];
 
 class Database {

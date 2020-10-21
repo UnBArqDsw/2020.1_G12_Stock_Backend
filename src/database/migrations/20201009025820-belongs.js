@@ -6,6 +6,7 @@ module.exports = {
       idCategory: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'categories',
           key: 'idCategory',
@@ -14,6 +15,7 @@ module.exports = {
       idProduct: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'products',
           key: 'idProduct',
