@@ -8,6 +8,7 @@ import ProductModel from '../app/models/Product';
 import LotModel from '../app/models/Lot';
 import CategoryModel from '../app/models/Category';
 import BelongsModel from '../app/models/Belongs';
+import DecreasesModel from '../app/models/Decreases';
 
 const models = [
   BranchModel,
@@ -18,6 +19,7 @@ const models = [
   LotModel,
   CategoryModel,
   BelongsModel,
+  DecreasesModel
 ];
 
 class Database {
