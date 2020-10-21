@@ -16,11 +16,10 @@ module.exports = {
         {
           idDecreasesType: 2,
           name: 'Dar baixa em produto',
-          description:
-            'Remover um produto por ter sido vendido.',
+          description: 'Remover um produto por ter sido vendido.',
           createdAt: new Date(),
           updatedAt: new Date(),
-        }
+        },
       ],
       {}
     );

@@ -19,7 +19,7 @@ const models = [
   LotModel,
   CategoryModel,
   BelongsModel,
-  DecreasesModel
+  DecreasesModel,
 ];
 
 class Database {

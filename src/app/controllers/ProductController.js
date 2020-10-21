@@ -10,10 +10,10 @@ class ProductController {
     }
   }
   async destroy(req, res) {
-    try{
+    try {
       const response = await ProductBase.destroy(req.body);
       return res.json(response);
-    }catch(error){
+    } catch (error) {
       return res.status(400).json({ message: error.message || error });
     }
   }

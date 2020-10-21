@@ -7,5 +7,9 @@ const routes = express.Router();
 const PATH = '/product';
 
 routes.post(PATH, AuthorizationMiddleware, ProductController.create);
-routes.post(PATH+'/destroy', AuthorizationMiddleware, ProductController.destroy);
+routes.post(
+  PATH + '/destroy',
+  AuthorizationMiddleware,
+  ProductController.destroy
+);
 export default routes;

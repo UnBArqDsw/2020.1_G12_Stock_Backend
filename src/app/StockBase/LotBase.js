@@ -12,14 +12,17 @@ class LotBase extends Base {
     const lot = await super.create(body);
     return lot;
   }
-  async decrease(DecreasesInfo){
+  async decrease(DecreasesInfo) {
     const quantity = DecreasesInfo.quantity;
-    const lot = await super.findOne({where: {idLot: DecreasesInfo.idLot}})
+    const lot = await super.findOne({ where: { idLot: DecreasesInfo.idLot } });
     const current_quantity = lot.dataValues.productQty;
-    if(quantity > current_quantity){
+    if (quantity > current_quantity) {
       throw Error('Quantidade indisponível para decremento.');
     }
-    const updated_lot = await this.LotModel.update({productQty: current_quantity-quantity},{where: {idLot: DecreasesInfo.idLot}});
+    const updated_lot = await this.LotModel.update(
+      { productQty: current_quantity - quantity },
+      { where: { idLot: DecreasesInfo.idLot } }
+    );
     return updated_lot;
   }
 }

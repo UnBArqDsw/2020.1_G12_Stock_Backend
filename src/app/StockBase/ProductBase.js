@@ -14,7 +14,9 @@ class ProductBase extends Base {
     return product;
   }
   async destroy(ProductInfo) {
-    const response = this.ProductModel.destroy({where: {idProduct: ProductInfo.idProduct}});
+    const response = this.ProductModel.destroy({
+      where: { idProduct: ProductInfo.idProduct },
+    });
     return response;
   }
 }
