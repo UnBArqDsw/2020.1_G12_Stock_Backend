@@ -9,5 +9,13 @@ class ProductController {
       return res.status(400).json({ message: error.message || error });
     }
   }
+  async destroy(req, res) {
+    try{
+      const response = await ProductBase.destroy(req.body);
+      return res.json(response);
+    }catch(error){
+      return res.status(400).json({ message: error.message || error });
+    }
+  }
 }
 export default new ProductController();
