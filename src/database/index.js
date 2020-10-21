@@ -4,8 +4,9 @@ import BranchModel from '../app/models/Branch';
 import AccessLevelModel from '../app/models/AccessLevel';
 import CollaboratorModel from '../app/models/Collaborator';
 import CompanyModel from '../app/models/Company';
+import ProductModel from '../app/models/Product';
 
-const models = [BranchModel, AccessLevelModel, CollaboratorModel, CompanyModel];
+const models = [BranchModel, AccessLevelModel, CollaboratorModel, CompanyModel, ProductModel];
 
 class Database {
   constructor() {
