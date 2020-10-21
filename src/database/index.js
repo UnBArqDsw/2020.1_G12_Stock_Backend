@@ -7,7 +7,14 @@ import CompanyModel from '../app/models/Company';
 import ProductModel from '../app/models/Product';
 import LotModel from '../app/models/Lot';
 
-const models = [BranchModel, AccessLevelModel, CollaboratorModel, CompanyModel, ProductModel, LotModel];
+const models = [
+  BranchModel,
+  AccessLevelModel,
+  CollaboratorModel,
+  CompanyModel,
+  ProductModel,
+  LotModel,
+];
 
 class Database {
   constructor() {

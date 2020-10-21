@@ -5,10 +5,10 @@ class ProductModel extends Model {
     super.init(
       {
         idProduct: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true,
         },
         idCompany: {
           type: Sequelize.INTEGER,
@@ -66,8 +66,6 @@ class ProductModel extends Model {
       as: 'Collaborator',
     });
   }*/
-
 }
-
 
 export default ProductModel;

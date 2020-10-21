@@ -2,14 +2,14 @@ import Base from './Base';
 import LotModel from '../models/Lot';
 
 class LotBase extends Base {
-    constructor() {
-        super(LotModel);
-    }
-    async create(LotInfo) {
-        console.log(LotInfo);
-        const lot = await super.create(LotInfo);
-        return lot;
-    }
+  constructor() {
+    super(LotModel);
+  }
+  async create(LotInfo, CollaboratorInfo) {
+    let body = LotInfo;
+    body.idCollaborator = CollaboratorInfo.idCollaborator;
+    const lot = await super.create(body);
+    return lot;
+  }
 }
 export default new LotBase();
-    
