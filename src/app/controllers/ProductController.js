@@ -1,5 +1,4 @@
 import ProductBase from '../StockBase/ProductBase';
-import _ from 'lodash';
 
 class ProductController {
   async create(req, res) {

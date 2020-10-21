@@ -6,6 +6,7 @@ import CollaboratorModel from '../app/models/Collaborator';
 import CompanyModel from '../app/models/Company';
 import ProductModel from '../app/models/Product';
 import LotModel from '../app/models/Lot';
+import CategoryModel from '../app/models/Category';
 
 const models = [
   BranchModel,
@@ -14,6 +15,7 @@ const models = [
   CompanyModel,
   ProductModel,
   LotModel,
+  CategoryModel,
 ];
 
 class Database {
