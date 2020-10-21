@@ -5,9 +5,11 @@ class ProductBase extends Base{
     constructor(){
         super(ProductModel);
     }
-    async create(ProductInfo){
-        console.log(ProductInfo);
-        const product = await super.create(ProductInfo);
+    async create(ProductInfo, CollaboratorInfo){
+        let body = ProductInfo;
+        body.idCollaborator = CollaboratorInfo.idCollaborator;
+        body.idCompany = CollaboratorInfo.idCompany;
+        const product = await super.create(body);
         return product;
     }
 }
