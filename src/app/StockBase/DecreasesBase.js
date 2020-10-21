@@ -11,9 +11,9 @@ class DecreasesBase extends Base {
   async create(DecreasesInfo, CollaboratorInfo) {
     let body = DecreasesInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
-    const decreases = await super.create(body);
-    this.LotBase.decrease(DecreasesInfo);
-    return decreases;
+    const lot = await this.LotBase.decrease(DecreasesInfo);
+    await super.create(body);
+    return lot;
   }
 }
 export default new DecreasesBase();

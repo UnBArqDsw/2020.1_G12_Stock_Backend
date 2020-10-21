@@ -19,10 +19,13 @@ class LotBase extends Base {
     if (quantity > current_quantity) {
       throw Error('Quantidade indisponível para decremento.');
     }
-    const updated_lot = await this.LotModel.update(
+    await this.LotModel.update(
       { productQty: current_quantity - quantity },
       { where: { idLot: DecreasesInfo.idLot } }
     );
+    const updated_lot = await super.findOne({
+      where: { idLot: DecreasesInfo.idLot },
+    });
     return updated_lot;
   }
 }
