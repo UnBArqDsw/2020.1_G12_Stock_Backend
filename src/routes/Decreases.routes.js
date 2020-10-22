@@ -6,5 +6,4 @@ const routes = express.Router();
 
 const PATH = '/decreases';
 
-routes.post(PATH, AuthorizationMiddleware, DecreasesController.create);
 export default routes;

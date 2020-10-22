@@ -7,4 +7,5 @@ const routes = express.Router();
 const PATH = '/lot';
 
 routes.post(PATH + '/create', AuthorizationMiddleware, LotController.create);
+routes.post(PATH + '/decreases', AuthorizationMiddleware, LotController.decreases);
 export default routes;

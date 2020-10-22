@@ -11,9 +11,12 @@ class DecreasesBase extends Base {
   async create(DecreasesInfo, CollaboratorInfo) {
     let body = DecreasesInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
-    const lot = await this.LotBase.decrease(DecreasesInfo);
-    await super.create(body);
-    return lot;
+    let date = new Date();
+    body.date = date.toLocaleDateString();
+    body.time = date.toLocaleTimeString();
+    
+    const decreases = await super.create(body);
+    return decreases;
   }
 }
 export default new DecreasesBase();
