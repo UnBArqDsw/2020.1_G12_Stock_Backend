@@ -1,5 +1,5 @@
 <p align="center">
-<img src=./assets/Logo03.jpg />
+<img src="./assets/Logo03.jpg" />
 </p>
 
 **Número da Lista**: 12<br>
