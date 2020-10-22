@@ -44,6 +44,15 @@ Para executar novamente, execute o comando:
 
 ```$ sudo docker-compose up```
 
+Para rodar a folha de estilo, execute o comando:
+
+```$ sudo docker exec -it 20201_g12_stock_backend_app_1 yarn lint```
+
+Para reparar os erros encontrados na folha de estilo, execute o comando:
+
+
+```$ sudo docker exec -it 20201_g12_stock_backend_app_1 yarn lint --fix```
+
 O projeto será disponibilizado em  ```localhost:8000```.
 
 ## Endpoints
