@@ -46,10 +46,7 @@ class LotBase extends Base {
   }
   async update(LotInfo, WhereInfo) {
     const lot = await super.update(LotInfo, WhereInfo);
-    
     return lot;
-    //await ProductBase.update({idProduct: LotInfo.idProduct});
-    //return lot;
   }
 }
 export default new LotBase();

@@ -41,6 +41,11 @@ class ProductBase extends Base {
     let quantity = DecreaseInfo.quantity;
     let idProduct = DecreaseInfo.idProduct;
     const lots = await this.LotBase.findAll({idProduct: idProduct});
+    const product = await super.findOne({where: {idProduct: idProduct}});
+    const current_product_quantity = product.dataValues.quantity;
+    if(quantity > current_product_quantity){
+      throw Error('Quantidade indisponível para decremento.');
+    }
     for(const lot of lots){
       let current_quantity = lot.productQty;
       if(quantity == 0){
@@ -77,8 +82,8 @@ class ProductBase extends Base {
       }
     }
     await this.update({idProduct: idProduct});
-    const product = await super.findOne({where: {idProduct: idProduct}});
-    return product;
+    const updated_product = await super.findOne({where: {idProduct: idProduct}});
+    return updated_product;
   }
 }
 export default new ProductBase();
