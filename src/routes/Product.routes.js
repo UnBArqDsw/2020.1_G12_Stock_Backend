@@ -16,5 +16,5 @@ routes.post(
   PATH + '/decreases',
   AuthorizationMiddleware,
   ProductController.decrease
-)
+);
 export default routes;

@@ -10,18 +10,20 @@ class ProductBase extends Base {
     this.LotBase = LotBase;
     this.DecreasesBase = DecreasesBase;
   }
-  async update(ProductInfo){
+  async update(ProductInfo) {
     const idProduct = ProductInfo.idProduct;
-    const lots = await this.LotBase.findAll({idProduct});
+    const lots = await this.LotBase.findAll({ idProduct });
     var quantity = 0;
-    for(const lot of lots){
-      quantity+=lot.productQty;
+    for (const lot of lots) {
+      quantity += lot.productQty;
     }
     const product = {
       idProduct: idProduct,
-      quantity: quantity
+      quantity: quantity,
     };
-    const updated_product = super.update(product, {where: {idProduct: idProduct}});
+    const updated_product = super.update(product, {
+      where: { idProduct: idProduct },
+    });
     return updated_product;
   }
   async create(ProductInfo, CollaboratorInfo) {
@@ -40,24 +42,28 @@ class ProductBase extends Base {
   async decrease(DecreaseInfo, CollaboratorInfo) {
     let quantity = DecreaseInfo.quantity;
     let idProduct = DecreaseInfo.idProduct;
-    const lots = await this.LotBase.findAll({idProduct: idProduct});
-    const product = await super.findOne({where: {idProduct: idProduct}});
-    const current_product_quantity = product.dataValues.quantity;
-    if(quantity > current_product_quantity){
+    const lots = await this.LotBase.findAll({ idProduct: idProduct });
+    const product = await super.findOne({ where: { idProduct: idProduct } });
+    let current_product_quantity = null;
+    try {
+      current_product_quantity = product.dataValues.quantity;
+    } catch (error) {
+      throw Error('Produto não encontrado.');
+    }
+    if (quantity > current_product_quantity) {
       throw Error('Quantidade indisponível para decremento.');
     }
-    for(const lot of lots){
+    for (const lot of lots) {
       let current_quantity = lot.productQty;
-      if(quantity == 0){
+      if (quantity == 0) {
         break;
       }
-      if(current_quantity <= 0){
+      if (current_quantity <= 0) {
         continue;
-      }
-      else if(current_quantity >= quantity){
+      } else if (current_quantity >= quantity) {
         await this.LotBase.update(
-          { productQty: current_quantity - quantity},
-          { where: { idLot: lot.idLot} }
+          { productQty: current_quantity - quantity },
+          { where: { idLot: lot.idLot } }
         );
         let decreases = {};
         decreases.idLot = lot.idLot;
@@ -67,22 +73,24 @@ class ProductBase extends Base {
         DecreasesBase.create(decreases, CollaboratorInfo);
 
         break;
-      }else if(current_quantity < quantity){
-        quantity-=current_quantity;
+      } else if (current_quantity < quantity) {
+        quantity -= current_quantity;
         await this.LotBase.update(
-          { productQty: 0},
-          { where: { idLot: lot.idLot} }
+          { productQty: 0 },
+          { where: { idLot: lot.idLot } }
         );
         let decreases = {};
         decreases.idLot = lot.idLot;
         decreases.idDecreasesType = 2;
         decreases.quantity = current_quantity;
-        
+
         DecreasesBase.create(decreases, CollaboratorInfo);
       }
     }
-    await this.update({idProduct: idProduct});
-    const updated_product = await super.findOne({where: {idProduct: idProduct}});
+    await this.update({ idProduct: idProduct });
+    const updated_product = await super.findOne({
+      where: { idProduct: idProduct },
+    });
     return updated_product;
   }
 }

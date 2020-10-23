@@ -4,7 +4,6 @@ import LotRoutes from './Lot.routes';
 import CategoryRoutes from './Category.routes';
 import BelongsRoutes from './Belongs.routes';
 import DecreasesRoutes from './Decreases.routes';
-import ProductRoutes from './Product.routes';
 
 export default function SetRoutes(app) {
   app.use('/api', [CollaboratorRoutes]);

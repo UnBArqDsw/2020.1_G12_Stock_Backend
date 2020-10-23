@@ -13,7 +13,7 @@ class LotBase extends Base {
     let body = LotInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
     const lot = await super.create(body);
-    await ProductBase.update({idProduct: lot.idProduct});
+    await ProductBase.update({ idProduct: lot.idProduct });
     return lot;
   }
   async decrease(DecreasesInfo, CollaboratorInfo) {
@@ -32,14 +32,17 @@ class LotBase extends Base {
     });
     await this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
 
-    await ProductBase.update({idProduct: updated_lot.idProduct});
+    await ProductBase.update({ idProduct: updated_lot.idProduct });
 
     return updated_lot;
   }
   async findAll(LotInfo) {
-    const lots = await super.findAll({where: { idProduct: LotInfo.idProduct }, order: [['dueDate', 'ASC']]});
-    var all_lots = [];
-    for(const lot of lots){
+    const lots = await super.findAll({
+      where: { idProduct: LotInfo.idProduct },
+      order: [['dueDate', 'ASC']],
+    });
+    let all_lots = [];
+    for (const lot of lots) {
       all_lots.push(lot.dataValues);
     }
     return all_lots;

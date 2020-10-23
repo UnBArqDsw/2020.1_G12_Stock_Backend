@@ -9,7 +9,7 @@ class ProductController {
       return res.status(400).json({ message: error.message || error });
     }
   }
-  async decreases(req, res){
+  async decreases(req, res) {
     try {
       const lot = await LotBase.decrease(req.body, req.collaborator);
       return res.json(lot);

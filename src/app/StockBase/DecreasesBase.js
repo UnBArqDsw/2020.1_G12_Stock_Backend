@@ -14,7 +14,7 @@ class DecreasesBase extends Base {
     let date = new Date();
     body.date = date.toLocaleDateString();
     body.time = date.toLocaleTimeString();
-    
+
     const decreases = await super.create(body);
     return decreases;
   }
