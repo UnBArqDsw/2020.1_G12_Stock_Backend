@@ -1,16 +1,19 @@
 import Base from './Base';
 import LotModel from '../models/Lot';
 import DecreasesBase from './DecreasesBase';
+import ProductBase from './ProductBase';
 
 class LotBase extends Base {
   constructor() {
     super(LotModel);
     this.DecreasesBase = DecreasesBase;
+    this.ProductBase = ProductBase;
   }
   async create(LotInfo, CollaboratorInfo) {
     let body = LotInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
     const lot = await super.create(body);
+    await ProductBase.update({idProduct: lot.idProduct});
     return lot;
   }
   async decrease(DecreasesInfo, CollaboratorInfo) {
@@ -27,17 +30,26 @@ class LotBase extends Base {
     const updated_lot = await super.findOne({
       where: { idLot: DecreasesInfo.idLot },
     });
-    this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
+    await this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
+
+    await ProductBase.update({idProduct: updated_lot.idProduct});
+
     return updated_lot;
   }
   async findAll(LotInfo) {
-    const lot = await super.findAll({where: { idProduct: LotInfo.idProduct }, order: [['dueDate', 'ASC']]});
-    return lot;
+    const lots = await super.findAll({where: { idProduct: LotInfo.idProduct }, order: [['dueDate', 'ASC']]});
+    var all_lots = [];
+    for(const lot of lots){
+      all_lots.push(lot.dataValues);
+    }
+    return all_lots;
   }
   async update(LotInfo, WhereInfo) {
-    console.log(WhereInfo);
     const lot = await super.update(LotInfo, WhereInfo);
+    
     return lot;
+    //await ProductBase.update({idProduct: LotInfo.idProduct});
+    //return lot;
   }
 }
 export default new LotBase();

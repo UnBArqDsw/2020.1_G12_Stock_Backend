@@ -42,6 +42,11 @@ class ProductModel extends Model {
           type: Sequelize.FLOAT,
           allowNull: false,
         },
+        quantity: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
         createdAt: {
           type: Sequelize.DATE,
           allowNull: false,

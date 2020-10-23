@@ -1,5 +1,7 @@
 'use strict';
 
+const { INTEGER } = require("sequelize");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('products', {
@@ -40,6 +42,11 @@ module.exports = {
       salePrice: {
         type: Sequelize.FLOAT,
         allowNull: false,
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         type: Sequelize.DATE,
