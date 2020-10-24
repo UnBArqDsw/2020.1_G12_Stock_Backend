@@ -19,7 +19,12 @@ class LotBase extends Base {
   async decrease(DecreasesInfo, CollaboratorInfo) {
     const quantity = DecreasesInfo.quantity;
     const lot = await super.findOne({ where: { idLot: DecreasesInfo.idLot } });
-    const current_quantity = lot.dataValues.productQty;
+    let current_quantity;
+    try{
+      current_quantity = lot.dataValues.productQty;
+    }catch(error){
+      throw Error('Lot não encontrado.');
+    }
     if (quantity > current_quantity) {
       throw Error('Quantidade indisponível para decremento.');
     }
@@ -30,6 +35,7 @@ class LotBase extends Base {
     const updated_lot = await super.findOne({
       where: { idLot: DecreasesInfo.idLot },
     });
+    DecreasesInfo.idDecreasesType = 1;
     await this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
 
     await ProductBase.update({ idProduct: updated_lot.idProduct });
