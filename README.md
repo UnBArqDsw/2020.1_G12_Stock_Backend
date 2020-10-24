@@ -67,7 +67,7 @@ Para reparar os erros encontrados na folha de estilo, execute o comando:
 
 Para ver quais os endpoints desssa aplicação acesse a rota principal ```/endpoints```.
 
-Requisições para testes estão disponíveis no **diretório** ```./insomnia```. Basta importar o arquivo mais atual no [Imnsonia](https://github.com/Kong/insomnia)
+Requisições para testes estão disponíveis no **diretório** ```./insomnia```. Basta importar o arquivo mais atual no [Insomnia](https://github.com/Kong/insomnia)
 e utilizar as rotas criadas :)
 
 ### Migrations
