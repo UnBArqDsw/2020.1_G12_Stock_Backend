@@ -19,6 +19,14 @@ module.exports = {
           key: 'idLot',
         },
       },
+      idDecreasesType: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'decreases_types',
+          key: 'idDecreasesType',
+        },
+      },
       quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
