@@ -10,6 +10,7 @@ class ProductBase extends Base {
     this.LotBase = LotBase;
     this.DecreasesBase = DecreasesBase;
   }
+
   async update(ProductInfo) {
     const idProduct = ProductInfo.idProduct;
     const lots = await this.LotBase.findAll({ idProduct });
@@ -26,6 +27,7 @@ class ProductBase extends Base {
     });
     return updated_product;
   }
+
   async create(ProductInfo, CollaboratorInfo) {
     let body = ProductInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
@@ -33,12 +35,19 @@ class ProductBase extends Base {
     const product = await super.create(body);
     return product;
   }
+
+  async listAll(idCompany) {
+    const products = await super.findAll({ where: { idCompany } });
+    return products;
+  }
+
   async destroy(ProductInfo) {
     const response = this.ProductModel.destroy({
       where: { idProduct: ProductInfo.idProduct },
     });
     return response;
   }
+
   async decrease(DecreaseInfo, CollaboratorInfo) {
     let quantity = DecreaseInfo.quantity;
     let idProduct = DecreaseInfo.idProduct;
@@ -87,6 +96,7 @@ class ProductBase extends Base {
         DecreasesBase.create(decreases, CollaboratorInfo);
       }
     }
+
     await this.update({ idProduct: idProduct });
     const updated_product = await super.findOne({
       where: { idProduct: idProduct },
@@ -94,4 +104,5 @@ class ProductBase extends Base {
     return updated_product;
   }
 }
+
 export default new ProductBase();

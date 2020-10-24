@@ -60,17 +60,6 @@ class ProductModel extends Model {
     );
     return this;
   }
-
-  /*static associate(models) {
-    this.belongsTo(models.Company, {
-      foreignKey: 'idCompany',
-      as: 'Company',
-    });
-    this.belongsTo(models.CompanyCollaborator, {
-      foreignKey: 'idCollaborator',
-      as: 'Collaborator',
-    });
-  }*/
 }
 
 export default ProductModel;

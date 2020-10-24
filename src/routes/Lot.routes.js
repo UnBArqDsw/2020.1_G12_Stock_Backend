@@ -13,9 +13,18 @@ routes.post(
   AccessLevelMiddleware,
   LotController.create
 );
+
+routes.get(
+  PATH + 's/:idProduct',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  LotController.index
+);
+
 routes.post(
   PATH + '/decreases',
   AuthorizationMiddleware,
   LotController.decreases
 );
+
 export default routes;
