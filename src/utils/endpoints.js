@@ -168,6 +168,16 @@ export default function endpoints() {
           ],
           description: 'Creates new relation of product to category.',
         },
+        {
+          type: 'GET',
+          endpoint: `${belongs}/productCategory/:idProduct`,
+          parameters: [
+            {
+              idProduct: 'Integer',
+            },
+          ],
+          description: 'Return all categoies from specific product.',
+        },
       ],
     },
   ];
