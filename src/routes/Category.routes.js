@@ -13,10 +13,12 @@ routes.post(
   AccessLevelMiddleware,
   CategoryController.create
 );
+
 routes.get(
-    '/categories/:idCompany',
-    AuthorizationMiddleware,
-    AccessLevelMiddleware,
-    CategoryController.index
-  );
+  '/categories/:idCompany',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  CategoryController.index
+);
+
 export default routes;

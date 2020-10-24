@@ -13,4 +13,5 @@ routes.post(
   AccessLevelMiddleware,
   BelongsController.create
 );
+
 export default routes;

@@ -10,4 +10,5 @@ class DecreasesController {
     }
   }
 }
+
 export default new DecreasesController();

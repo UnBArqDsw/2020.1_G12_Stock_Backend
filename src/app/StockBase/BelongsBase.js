@@ -5,6 +5,7 @@ class BelongsBase extends Base {
   constructor() {
     super(BelongsModel);
   }
+
   async create(BelongsInfo) {
     let categories = BelongsInfo.idCategory;
     const belongs = [];
@@ -18,4 +19,5 @@ class BelongsBase extends Base {
     return belongs;
   }
 }
+
 export default new BelongsBase();

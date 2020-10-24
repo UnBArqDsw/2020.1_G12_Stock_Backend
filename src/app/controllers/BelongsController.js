@@ -10,4 +10,5 @@ class BelongsController {
     }
   }
 }
+
 export default new BelongsController();

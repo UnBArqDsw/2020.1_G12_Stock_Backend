@@ -104,4 +104,5 @@ class ProductBase extends Base {
     return updated_product;
   }
 }
+
 export default new ProductBase();

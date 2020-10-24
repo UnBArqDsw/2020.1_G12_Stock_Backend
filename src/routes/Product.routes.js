@@ -13,21 +13,25 @@ routes.post(
   AccessLevelMiddleware,
   ProductController.create
 );
+
 routes.get(
   PATH + 's/:idCompany',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   ProductController.index
 );
+
 routes.post(
   PATH + '/destroy',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   ProductController.destroy
 );
+
 routes.post(
   PATH + '/decreases',
   AuthorizationMiddleware,
   ProductController.decrease
 );
+
 export default routes;

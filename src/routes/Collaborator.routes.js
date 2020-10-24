@@ -8,11 +8,14 @@ const routes = express.Router();
 const PATH = '/collaborator';
 
 routes.post(PATH, CollaboratorController.create);
+
 routes.get(
   PATH + 's/:idCompany',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   CollaboratorController.index
 );
+
 routes.post(PATH + '/auth', CollaboratorController.auth);
+
 export default routes;
