@@ -67,7 +67,8 @@ export default function endpoints() {
               idProduct: 'Integer',
             },
           ],
-          description: "Remove product from stock. Only works if product doesn't have lot",
+          description:
+            "Remove product from stock. Only works if product doesn't have lot",
         },
         {
           type: 'POST',
@@ -78,8 +79,7 @@ export default function endpoints() {
               quantity: 'Integer',
             },
           ],
-          description:
-            'Decreases qtd from spcefic product. Sell the product',
+          description: 'Decreases qtd from spcefic product. Sell the product',
         },
         {
           type: 'GET',
@@ -89,8 +89,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description:
-            'Return a list of all product for a specific company',
+          description: 'Return a list of all product for a specific company',
         },
       ],
       category: [
@@ -113,8 +112,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description:
-            'Return a list of all categories for a specific company',
+          description: 'Return a list of all categories for a specific company',
         },
       ],
       lot: [
@@ -128,7 +126,7 @@ export default function endpoints() {
               dueDate: 'String',
               productQtd: 'Integer',
               description: 'String',
-              purchasePrice: 'Integer'
+              purchasePrice: 'Integer',
             },
           ],
           description: 'Creates new category.',
@@ -142,7 +140,8 @@ export default function endpoints() {
               quantity: 'String',
             },
           ],
-          description: "Remove lot. Only works if lot doesn't have products related at.",
+          description:
+            "Remove lot. Only works if lot doesn't have products related at.",
         },
         {
           type: 'GET',
@@ -152,8 +151,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description:
-            'Return a list of all lots for a specific company',
+          description: 'Return a list of all lots for a specific company',
         },
       ],
       belongs: [
