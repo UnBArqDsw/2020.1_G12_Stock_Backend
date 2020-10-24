@@ -174,7 +174,7 @@ export default function endpoints() {
               idProduct: 'Integer',
             },
           ],
-          description: 'Return a list of all categoies of a specific product.',
+          description: 'Return a list of all categories of a specific product.',
         },
       ],
     },
