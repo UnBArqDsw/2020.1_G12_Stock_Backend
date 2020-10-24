@@ -81,6 +81,17 @@ export default function endpoints() {
           description:
             'Decreases qtd from spcefic product. Sell the product',
         },
+        {
+          type: 'GET',
+          endpoint: `${product}s/:idCompany`,
+          parameters: [
+            {
+              idCompany: 'Integer',
+            },
+          ],
+          description:
+            'Return a list of all product for a specific company',
+        },
       ],
       category: [
         {
@@ -93,6 +104,17 @@ export default function endpoints() {
             },
           ],
           description: 'Creates new category.',
+        },
+        {
+          type: 'GET',
+          endpoint: `categories/:idCompany`,
+          parameters: [
+            {
+              idCompany: 'Integer',
+            },
+          ],
+          description:
+            'Return a list of all categories for a specific company',
         },
       ],
       lot: [
@@ -121,6 +143,17 @@ export default function endpoints() {
             },
           ],
           description: "Remove lot. Only works if lot doesn't have products related at.",
+        },
+        {
+          type: 'GET',
+          endpoint: `${lot}s/:idCompany`,
+          parameters: [
+            {
+              idCompany: 'Integer',
+            },
+          ],
+          description:
+            'Return a list of all lots for a specific company',
         },
       ],
       belongs: [
