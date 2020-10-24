@@ -1,6 +1,6 @@
 export default function (req, res, next) {
   try {
-    const accessLevel = req.collaborator.accessLevel;
+    const accessLevel = req.collaborator.idAccessLevel;
 
     if (accessLevel == 3) {
       res.status('401').send('Usuário não autorizado.');
