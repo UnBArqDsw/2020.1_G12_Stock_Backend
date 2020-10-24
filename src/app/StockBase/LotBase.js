@@ -20,9 +20,9 @@ class LotBase extends Base {
     const quantity = DecreasesInfo.quantity;
     const lot = await super.findOne({ where: { idLot: DecreasesInfo.idLot } });
     let current_quantity;
-    try{
+    try {
       current_quantity = lot.dataValues.productQty;
-    }catch(error){
+    } catch (error) {
       throw Error('Lot não encontrado.');
     }
     if (quantity > current_quantity) {
