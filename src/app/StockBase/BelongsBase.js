@@ -18,6 +18,11 @@ class BelongsBase extends Base {
     }
     return belongs;
   }
+
+  async listAll(idProduct) {
+    const categories = await super.findAll({ where: { idProduct } });
+    return categories;
+  }
 }
 
 export default new BelongsBase();

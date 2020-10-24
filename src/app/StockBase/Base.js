@@ -18,7 +18,7 @@ class Base {
     const response = await this.modelBase.findAll(data);
     return response;
   }
-  
+
   async update(data, where) {
     const response = await this.modelBase.update(data, where);
     return response;
