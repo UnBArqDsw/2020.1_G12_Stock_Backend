@@ -57,4 +57,4 @@ O projeto será disponibilizado em  ```localhost:8000```.
 
 ## Endpoints
 
-Para ver quais os endpoints desssa aplicação acesse a rota principal ```/```.
+Para ver quais os endpoints desssa aplicação acesse a rota principal ```/endpoints```.

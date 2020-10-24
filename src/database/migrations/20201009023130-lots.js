@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      productQty: {
+      productQtd: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

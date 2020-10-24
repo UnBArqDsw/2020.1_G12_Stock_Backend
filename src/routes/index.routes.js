@@ -7,7 +7,7 @@ import BelongsRoutes from './Belongs.routes';
 import DecreasesRoutes from './Decreases.routes';
 
 export default function SetRoutes(app) {
-  app.use('/', (req, res) => {
+  app.use('/endpoints', (req, res) => {
     return res.json(endpoints());
   });
   app.use('/api', [CollaboratorRoutes]);
