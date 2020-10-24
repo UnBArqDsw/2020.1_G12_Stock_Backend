@@ -42,7 +42,7 @@ export default function endpoints() {
             },
           ],
           description:
-            'Returns a list of all collaborators for a specific Company.',
+            'Returns a list of all collaborators of a specific Company.',
         },
       ],
       product: [
@@ -89,7 +89,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description: 'Return a list of all product for a specific company',
+          description: 'Return a list of all product of a specific company',
         },
       ],
       category: [
@@ -112,7 +112,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description: 'Return a list of all categories for a specific company',
+          description: 'Return a list of all categories of a specific company',
         },
       ],
       lot: [
@@ -151,7 +151,7 @@ export default function endpoints() {
               idCompany: 'Integer',
             },
           ],
-          description: 'Return a list of all lots for a specific company',
+          description: 'Return a list of all lots of a specific company',
         },
       ],
       belongs: [
@@ -174,7 +174,7 @@ export default function endpoints() {
               idProduct: 'Integer',
             },
           ],
-          description: 'Return all categoies from specific product.',
+          description: 'Return a list of all categoies of a specific product.',
         },
       ],
     },
