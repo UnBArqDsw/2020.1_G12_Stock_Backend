@@ -55,6 +55,19 @@ Para reparar os erros encontrados na folha de estilo, execute o comando:
 
 O projeto será disponibilizado em  ```localhost:8000```.
 
-## Endpoints
+### Endpoints
 
 Para ver quais os endpoints desssa aplicação acesse a rota principal ```/endpoints```.
+
+### Migrations
+Para desfazer as migrations, execute o comando:
+
+```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:migrate:undo:all```
+
+Para rodar as migrations, execute o comando:
+
+```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:migrate```
+
+Para rodar as seeds e popular o banco de dados, execute o comando:
+
+```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:seed:all```
