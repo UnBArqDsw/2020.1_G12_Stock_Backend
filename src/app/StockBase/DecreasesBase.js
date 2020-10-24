@@ -8,6 +8,7 @@ class DecreasesBase extends Base {
     this.DecreasesModel = DecreasesModel;
     this.LotBase = LotBase;
   }
+
   async create(DecreasesInfo, CollaboratorInfo) {
     let body = DecreasesInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
@@ -19,4 +20,5 @@ class DecreasesBase extends Base {
     return decreases;
   }
 }
+
 export default new DecreasesBase();

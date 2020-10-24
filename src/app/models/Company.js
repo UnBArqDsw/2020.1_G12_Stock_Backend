@@ -25,6 +25,7 @@ class CompanyModel extends Model {
 
     return this;
   }
+
   static associate(models) {
     this.belongsTo(models.BranchModel, {
       foreignKey: 'idBranch',
