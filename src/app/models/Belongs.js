@@ -22,6 +22,10 @@ class BelongsModel extends Model {
             key: 'idProduct',
           },
         },
+        nameCategory: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         createdAt: {
           type: Sequelize.DATE,
           allowNull: false,
