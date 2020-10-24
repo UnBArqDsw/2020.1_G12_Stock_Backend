@@ -9,6 +9,7 @@ class LotBase extends Base {
     this.DecreasesBase = DecreasesBase;
     this.ProductBase = ProductBase;
   }
+
   async create(LotInfo, CollaboratorInfo) {
     let body = LotInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
@@ -16,6 +17,12 @@ class LotBase extends Base {
     await ProductBase.update({ idProduct: lot.idProduct });
     return lot;
   }
+
+  async listAll(idProduct) {
+    const lots = await super.findAll({ where: { idProduct } });
+    return lots;
+  }
+
   async decrease(DecreasesInfo, CollaboratorInfo) {
     const quantity = DecreasesInfo.quantity;
     const lot = await super.findOne({ where: { idLot: DecreasesInfo.idLot } });
@@ -42,6 +49,7 @@ class LotBase extends Base {
 
     return updated_lot;
   }
+
   async findAll(LotInfo) {
     const lots = await super.findAll({
       where: { idProduct: LotInfo.idProduct },
@@ -53,9 +61,11 @@ class LotBase extends Base {
     }
     return all_lots;
   }
+
   async update(LotInfo, WhereInfo) {
     const lot = await super.update(LotInfo, WhereInfo);
     return lot;
   }
 }
+
 export default new LotBase();

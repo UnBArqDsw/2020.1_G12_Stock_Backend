@@ -31,6 +31,7 @@ class CollaboratorModel extends Model {
 
     return this;
   }
+
   static associate(models) {
     this.hasOne(models.AccessLevelModel, {
       foreignKey: 'idAccessLevel',
@@ -45,6 +46,7 @@ class CollaboratorModel extends Model {
   verifyPassword(password) {
     return compare(password, this.password);
   }
+
   generateJWT() {
     const payload = {
       idCollaborator: this.idCollaborator,

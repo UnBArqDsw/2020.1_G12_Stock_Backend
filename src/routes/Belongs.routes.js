@@ -13,4 +13,12 @@ routes.post(
   AccessLevelMiddleware,
   BelongsController.create
 );
+
+routes.get(
+  PATH + '/productCategories/:idProduct',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  BelongsController.index
+);
+
 export default routes;

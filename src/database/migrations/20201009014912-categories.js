@@ -9,6 +9,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      idCompany: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'companies',
+          key: 'idCompany',
+        },
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -9,6 +9,20 @@ class ProductController {
       return res.status(400).json({ message: error.message || error });
     }
   }
+
+  async index(req, res) {
+    const { idProduct } = req.params;
+    console.log(idProduct);
+    try {
+      const lots = await LotBase.listAll(idProduct);
+      return res.json(lots);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
   async decreases(req, res) {
     try {
       const lot = await LotBase.decrease(req.body, req.collaborator);
@@ -18,4 +32,5 @@ class ProductController {
     }
   }
 }
+
 export default new ProductController();
