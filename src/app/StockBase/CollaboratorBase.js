@@ -30,4 +30,5 @@ class ColaboratorBase extends Base {
     }
   }
 }
+
 export default new ColaboratorBase();

@@ -10,6 +10,7 @@ class CollaboratorController {
       return res.status(400).json({ message: error.message || error });
     }
   }
+  
   async index(req, res) {
     const { idCompany } = req.params;
 

@@ -9,6 +9,18 @@ class ProductController {
       return res.status(400).json({ message: error.message || error });
     }
   }
+  async index(req, res) {
+    const { idCompany } = req.params;
+
+    try {
+      const products = await ProductBase.listAll(idCompany);
+      return res.json(products);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
   async destroy(req, res) {
     try {
       const response = await ProductBase.destroy(req.body);
