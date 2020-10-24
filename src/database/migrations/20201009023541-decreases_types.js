@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('decreases_types', {
-      idDecreasesTypes: {
+      idDecreasesType: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
