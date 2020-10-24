@@ -1,6 +1,7 @@
 import express from 'express';
 import CollaboratorController from '../app/controllers/CollaboratorController';
 import AuthorizationMiddleware from '../app/middlewares/Authorization';
+import AccessLevelMiddleware from '../app/middlewares/AccessLevel';
 
 const routes = express.Router();
 
@@ -10,6 +11,7 @@ routes.post(PATH, CollaboratorController.create);
 routes.get(
   PATH + '/:idCompany',
   AuthorizationMiddleware,
+  AccessLevelMiddleware,
   CollaboratorController.index
 );
 routes.post(PATH + '/auth', CollaboratorController.auth);
