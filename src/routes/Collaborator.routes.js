@@ -9,7 +9,7 @@ const PATH = '/collaborator';
 
 routes.post(PATH, CollaboratorController.create);
 routes.get(
-  PATH + '/:idCompany',
+  PATH + 's/:idCompany',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   CollaboratorController.index
