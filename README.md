@@ -44,6 +44,14 @@ Para executar novamente, execute o comando:
 
 ```$ sudo docker-compose up```
 
+O projeto será disponibilizado em  ```localhost:8000```.
+## Contribuição
+Para contribuir com esse repositório:
+1. Crie um issue detalhando o que será feito.
+2. Crie uma branch com nome significativo com base na branch ```devel```. A branch criada deve seguir o padrão: ```XX-nome-da-issue```, sendo o XX o número da issue.
+3. Faça suas alterações na branch criada.
+4. Rode a folha de estilo para verificar se está de acordo com os padrões do repositório.
+
 Para rodar a folha de estilo, execute o comando:
 
 ```$ sudo docker exec -it 20201_g12_stock_backend_app_1 yarn lint```
@@ -53,21 +61,28 @@ Para reparar os erros encontrados na folha de estilo, execute o comando:
 
 ```$ sudo docker exec -it 20201_g12_stock_backend_app_1 yarn lint --fix```
 
-O projeto será disponibilizado em  ```localhost:8000```.
+5. Abra um pull request detalhado com tudo o que foi feito, seguindo o template disponibilizado.
 
 ### Endpoints
 
 Para ver quais os endpoints desssa aplicação acesse a rota principal ```/endpoints```.
 
-### Migrations
-Para desfazer as migrations, execute o comando:
+Requisições para testes estão disponíveis no **diretório** ```./insomnia```. Basta importar o arquivo mais atual no [Insomnia](https://github.com/Kong/insomnia)
+e utilizar as rotas criadas :)
 
-```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:migrate:undo:all```
+### Migrations
+Caso precise atualizar as migrations, desfaça as migrations com o seguinte comando:
+
+```sudo docker exec -it nomeContainer yarn sequelize db:migrate:undo:all```
 
 Para rodar as migrations, execute o comando:
 
-```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:migrate```
+```sudo docker exec -it nomeContainer yarn sequelize db:migrate```
 
 Para rodar as seeds e popular o banco de dados, execute o comando:
 
-```sudo docker exec -it 20201g12stockbackend_app_1 yarn sequelize db:seed:all```
+```sudo docker exec -it nomeContainer yarn sequelize db:seed:all```
+
+Para descobrir o nome do container, execute o comando: ```sudo docker ps -a```
+
+**Nome default do container**: 20201g12stockbackend_app_1
