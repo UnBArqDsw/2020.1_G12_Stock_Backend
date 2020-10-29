@@ -18,6 +18,7 @@ class CollaboratorModel extends Model {
         document: Sequelize.STRING,
         password: Sequelize.STRING,
         photo: Sequelize.STRING,
+        email: Sequelize.STRING,
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
       },
