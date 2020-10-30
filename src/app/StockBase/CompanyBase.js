@@ -7,6 +7,9 @@ class CompanyBase extends Base {
   }
 
   async create(CompanyInfo) {
+    let date = new Date();
+    CompanyInfo.registerDate = date.toLocaleDateString()+" "+date.toLocaleTimeString();
+
     const company = await super.create(CompanyInfo);
     return company;
   }
