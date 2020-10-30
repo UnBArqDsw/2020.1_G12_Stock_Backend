@@ -18,6 +18,11 @@ class ColaboratorBase extends Base {
         collaboratorInfo.idAccessLevel = 1;
         const collaborator = await super.create(collaboratorInfo);
         return collaborator;
+      }else{
+        collaboratorInfo.idCompany = idCompany;
+        collaboratorInfo.idAccessLevel = 3;
+        const collaborator = await super.create(collaboratorInfo);
+        return collaborator;
       }
     }
     const collaborator = await super.create(collaboratorInfo);
