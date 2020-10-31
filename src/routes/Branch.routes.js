@@ -5,9 +5,6 @@ const routes = express.Router();
 
 const PATH = '/branch/';
 
-routes.get(
-  PATH,
-  BranchController.index
-);
+routes.get(PATH, BranchController.index);
 
 export default routes;
