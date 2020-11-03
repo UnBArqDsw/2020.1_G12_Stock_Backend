@@ -34,6 +34,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      activate: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,

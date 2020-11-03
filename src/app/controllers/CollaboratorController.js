@@ -4,6 +4,7 @@ import _ from 'lodash';
 class CollaboratorController {
   async create(req, res) {
     try {
+      req.body.activate = true;
       const collaborator = await CollaboratorBase.create(req.body);
       return res.json(collaborator);
     } catch (error) {
