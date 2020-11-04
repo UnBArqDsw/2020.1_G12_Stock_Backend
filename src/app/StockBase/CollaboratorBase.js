@@ -19,6 +19,10 @@ class ColaboratorBase extends Base {
 
   async auth(document, password) {
     const collaborator = await super.findOne({ where: { document } });
+
+    if (collaborator.dataValues.activate == false)
+      throw { status: 403, message: 'Usuário não autorizado' };
+
     if (!collaborator)
       throw { status: 401, message: 'Verifique seu documento e senha' };
 
@@ -31,7 +35,7 @@ class ColaboratorBase extends Base {
     }
   }
 
-  async update(data, idCollaborator) {
+  async updateProfile(data, idCollaborator) {
     const { password, newPassword, newConfirmPassword } = data;
 
     const collaborator = await super.findOne({ where: { idCollaborator } });
@@ -49,6 +53,16 @@ class ColaboratorBase extends Base {
     }
 
     data.password = await hashPass(password);
+    const collaboratorUpdated = await super.update(data, {
+      where: { idCollaborator },
+    });
+    return collaboratorUpdated ? true : false;
+  }
+
+  async updateCollaborator(data, idCollaborator) {
+    const collaborator = await super.findOne({ where: { idCollaborator } });
+    if (!collaborator) throw { status: 401, message: 'Usuário não encontrado' };
+
     const collaboratorUpdated = await super.update(data, {
       where: { idCollaborator },
     });

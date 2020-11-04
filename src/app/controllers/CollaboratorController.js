@@ -32,6 +32,7 @@ class CollaboratorController {
 
   async auth(req, res) {
     const { document, password } = req.body;
+
     try {
       const response = await CollaboratorBase.auth(document, password);
       return res
@@ -53,11 +54,47 @@ class CollaboratorController {
     }
   }
 
-  async update(req, res) {
+  async updateProfile(req, res) {
     const { idCollaborator } = req.params;
-
+    const { idAccessLevel, activate } = req.body;
     try {
-      const response = await CollaboratorBase.update(req.body, idCollaborator);
+      if (idAccessLevel || activate) {
+        return res.status(403).json({
+          message: 'Its not possible to update access level or status',
+        });
+      }
+      const response = await CollaboratorBase.updateProfile(
+        req.body,
+        idCollaborator
+      );
+
+      if (response)
+        return res
+          .status(200)
+          .json({ message: 'Collaborator updated successfully.' });
+
+      return res.status(400).json({ message: 'Error updating Collaborator.' });
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
+  async updateCollaborator(req, res) {
+    const { idCollaborator } = req.params;
+    const { password } = req.body;
+    try {
+      if (password) {
+        return res.status(403).json({
+          message: 'Its not possible to update collaborator password',
+        });
+      }
+
+      const response = await CollaboratorBase.updateCollaborator(
+        req.body,
+        idCollaborator
+      );
 
       if (response)
         return res
