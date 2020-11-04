@@ -18,4 +18,6 @@ routes.get(
 
 routes.post(PATH + '/auth', CollaboratorController.auth);
 
+routes.put(PATH + '/update/:idCollaborator', CollaboratorController.update);
+
 export default routes;

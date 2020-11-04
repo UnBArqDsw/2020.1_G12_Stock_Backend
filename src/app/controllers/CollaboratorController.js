@@ -6,7 +6,7 @@ class CollaboratorController {
     try {
       req.body.activate = true;
       const collaborator = await CollaboratorBase.create(req.body);
-      return res.json(collaborator);
+      return res.json(_.omit(collaborator.dataValues, ['password']));
     } catch (error) {
       return res.status(400).json({ message: error.message || error });
     }
@@ -17,7 +17,8 @@ class CollaboratorController {
 
     try {
       const collaborators = await CollaboratorBase.listAll(idCompany);
-      return res.json(collaborators);
+
+      return res.json(collaborators.map(collaborators => _.omit(collaborators.dataValues, ['password'])))
     } catch (error) {
       return res
         .status(error.status || 400)
@@ -44,6 +45,23 @@ class CollaboratorController {
     } catch (error) {
       return res
         .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
+  async update(req, res) {
+    const { idCollaborator } = req.params;
+
+    try {
+      const response = await CollaboratorBase.update(req.body, idCollaborator)
+
+      if (response) return res.status(200).json({ message: 'Collaborator updated successfully.' });
+
+      return res.status(400).json({ message: 'Error updating Collaborator.' })
+
+    } catch (error) {
+      return res
+        .status(error.status || 400.)
         .json({ message: error.message || error });
     }
   }

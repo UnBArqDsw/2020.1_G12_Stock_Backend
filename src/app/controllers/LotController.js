@@ -12,7 +12,7 @@ class ProductController {
 
   async index(req, res) {
     const { idProduct } = req.params;
-    console.log(idProduct);
+
     try {
       const lots = await LotBase.listAll(idProduct);
       return res.json(lots);
