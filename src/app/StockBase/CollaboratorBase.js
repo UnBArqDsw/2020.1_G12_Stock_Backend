@@ -11,8 +11,7 @@ class ColaboratorBase extends Base {
     if (collaboratorInfo.companyDocument) {
       const idCompany = await CompanyBase.getIdByCpfCnpj(collaboratorInfo);
       const collaborators = await this.listAll(idCompany);
-      console.log(collaborators);
-      console.log(collaborators.length);
+      
       if (collaborators.length == 0) {
         collaboratorInfo.idCompany = idCompany;
         collaboratorInfo.idAccessLevel = 1;
