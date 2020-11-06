@@ -35,12 +35,12 @@ class ColaboratorBase extends Base {
     const { password, newPassword, newConfirmPassword } = data;
 
     const collaborator = await super.findOne({ where: { idCollaborator } });
-    if (!collaborator) throw { status: 401, message: 'Usuário não encontrado' };
+    if (!collaborator) throw { status: 404, message: 'Usuário não encontrado' };
 
     const isPasswordValid = await collaborator.verifyPassword(password);
 
     if (!isPasswordValid)
-      throw { status: 401, message: 'Verifique seu documento e senha' };
+      throw { status: 400, message: 'Verifique seu documento e senha' };
 
     if (newPassword && newConfirmPassword) {
       if (newPassword !== newConfirmPassword)
