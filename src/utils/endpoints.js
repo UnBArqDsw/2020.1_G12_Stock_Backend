@@ -44,6 +44,26 @@ export default function endpoints() {
           description:
             'Returns a list of all collaborators of a specific Company.',
         },
+        {
+          type: 'PUT',
+          endpoint: `${collaborator}/update/profile/:idCollaborator`,
+          parameters: [
+            {
+              idCollaborator: 'Integer',
+            },
+          ],
+          description: 'Update profile data.',
+        },
+        {
+          type: 'PUT',
+          endpoint: `${collaborator}/update/collaborator/:idCollaborator`,
+          parameters: [
+            {
+              idCollaborator: 'Integer',
+            },
+          ],
+          description: 'Update collaborator data.',
+        },
       ],
       product: [
         {
