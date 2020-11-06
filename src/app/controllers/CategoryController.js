@@ -11,8 +11,7 @@ class CategoryController {
   }
 
   async index(req, res) {
-    const { idCompany } = req.params;
-    console.log(idCompany);
+    const { idCompany } = req.collaborator;
     try {
       const categories = await CategoryBase.listAll(idCompany);
       return res.json(categories);

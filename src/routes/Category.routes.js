@@ -15,7 +15,7 @@ routes.post(
 );
 
 routes.get(
-  '/categories/:idCompany',
+  '/categories',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   CategoryController.index

@@ -12,16 +12,15 @@ class CollaboratorController {
   }
 
   async index(req, res) {
-    const { idCompany } = req.params;
-
-    try {
-      const collaborators = await CollaboratorBase.listAll(idCompany);
-      return res.json(collaborators);
-    } catch (error) {
-      return res
-        .status(error.status || 400)
-        .json({ message: error.message || error });
-    }
+    const { idCompany } = req.collaborator;
+      try {
+        const collaborators = await CollaboratorBase.listAll(idCompany);
+        return res.json(collaborators);
+      } catch (error) {
+        return res
+          .status(error.status || 400)
+          .json({ message: error.message || error });
+      }
   }
 
   async auth(req, res) {

@@ -11,16 +11,11 @@ class BelongsBase extends Base {
     let categories = BelongsInfo.idCategory;
     const belongs = [];
     for (const c of categories) {
-      const nameCategory = await CategoryModel.findOne({
-        where: { idCategory: c },
-      });
       const body = {
-        nameCategory: nameCategory.dataValues.name,
         idCategory: c,
         idProduct: BelongsInfo.idProduct,
       };
       belongs.push(await super.create(body));
-      console.log(belongs);
     }
     return belongs;
   }
