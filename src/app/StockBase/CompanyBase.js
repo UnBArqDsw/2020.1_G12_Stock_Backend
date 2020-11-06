@@ -16,7 +16,6 @@ class CompanyBase extends Base {
   }
   async getIdByCpfCnpj(CompanyInfo) {
     if (CompanyInfo.companyDocument) {
-
       const company = await super.findOne({
         where: { document: CompanyInfo.companyDocument },
       });
