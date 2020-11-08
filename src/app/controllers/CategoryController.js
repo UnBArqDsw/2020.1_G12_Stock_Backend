@@ -3,7 +3,12 @@ import CategoryBase from '../StockBase/CategoryBase';
 class CategoryController {
   async create(req, res) {
     try {
-      const category = await CategoryBase.create(req.body);
+      const { idCompany } = req.collaborator;
+      const body = {
+        idCompany,
+        ...req.body,
+      };
+      const category = await CategoryBase.create(body);
       return res.json(category);
     } catch (error) {
       return res.status(400).json({ message: error.message || error });

@@ -2,6 +2,7 @@ import express from 'express';
 import ProductController from '../app/controllers/ProductController';
 import AuthorizationMiddleware from '../app/middlewares/Authorization';
 import AccessLevelMiddleware from '../app/middlewares/AccessLevel';
+import validateProductBody from '../app/middlewares/validation/product';
 
 const routes = express.Router();
 
@@ -11,14 +12,11 @@ routes.post(
   PATH,
   AuthorizationMiddleware,
   AccessLevelMiddleware,
+  validateProductBody,
   ProductController.create
 );
 
-routes.get(
-  PATH + 's',
-  AuthorizationMiddleware,
-  ProductController.index
-);
+routes.get(PATH + 's', AuthorizationMiddleware, ProductController.index);
 
 routes.post(
   PATH + '/destroy',

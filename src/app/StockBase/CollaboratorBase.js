@@ -8,17 +8,15 @@ class ColaboratorBase extends Base {
   }
 
   async create(collaboratorInfo) {
-    if(collaboratorInfo.companyDocument){
+    if (collaboratorInfo.companyDocument) {
       const idCompany = await CompanyBase.getIdByCpfCnpj(collaboratorInfo);
       const collaborators = await this.listAll(idCompany);
-      console.log(collaborators);
-      console.log(collaborators.length);
-      if(collaborators.length == 0){
+      if (collaborators.length == 0) {
         collaboratorInfo.idCompany = idCompany;
         collaboratorInfo.idAccessLevel = 1;
         const collaborator = await super.create(collaboratorInfo);
         return collaborator;
-      }else{
+      } else {
         collaboratorInfo.idCompany = idCompany;
         collaboratorInfo.idAccessLevel = 3;
         const collaborator = await super.create(collaboratorInfo);
