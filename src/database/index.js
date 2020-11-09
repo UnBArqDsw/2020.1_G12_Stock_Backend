@@ -20,6 +20,7 @@ const models = [
   CategoryModel,
   BelongsModel,
   DecreasesModel,
+  BranchModel,
 ];
 
 class Database {

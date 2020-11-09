@@ -1,5 +1,6 @@
 import Base from './Base';
 import CollaboratorModel from '../models/Collaborator';
+import CompanyBase from '../StockBase/CompanyBase';
 
 class ColaboratorBase extends Base {
   constructor() {
@@ -7,6 +8,22 @@ class ColaboratorBase extends Base {
   }
 
   async create(collaboratorInfo) {
+    if (collaboratorInfo.companyDocument) {
+      const idCompany = await CompanyBase.getIdByCpfCnpj(collaboratorInfo);
+      const collaborators = await this.listAll(idCompany);
+
+      if (collaborators.length == 0) {
+        collaboratorInfo.idCompany = idCompany;
+        collaboratorInfo.idAccessLevel = 1;
+        const collaborator = await super.create(collaboratorInfo);
+        return collaborator;
+      } else {
+        collaboratorInfo.idCompany = idCompany;
+        collaboratorInfo.idAccessLevel = 3;
+        const collaborator = await super.create(collaboratorInfo);
+        return collaborator;
+      }
+    }
     const collaborator = await super.create(collaboratorInfo);
     return collaborator;
   }

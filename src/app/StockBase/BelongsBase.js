@@ -20,7 +20,6 @@ class BelongsBase extends Base {
         idProduct: BelongsInfo.idProduct,
       };
       belongs.push(await super.create(body));
-      console.log(belongs);
     }
     return belongs;
   }

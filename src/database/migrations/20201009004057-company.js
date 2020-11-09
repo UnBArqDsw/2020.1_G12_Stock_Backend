@@ -28,7 +28,7 @@ module.exports = {
       },
       photo: {
         type: Sequelize.STRING(80000),
-        allowNull: false,
+        allowNull: true,
       },
       maxQtdCollaborator: {
         type: Sequelize.INTEGER,

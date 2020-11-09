@@ -13,7 +13,10 @@ class CompanyModel extends Model {
         name: Sequelize.STRING,
         telephone: Sequelize.INTEGER,
         email: Sequelize.STRING,
-        photo: Sequelize.STRING(80000),
+        photo: {
+          type: Sequelize.STRING(80000),
+          allowNull: true,
+        },
         maxQtdCollaborator: Sequelize.INTEGER,
         registerDate: Sequelize.DATE,
         idBranch: Sequelize.INTEGER,
