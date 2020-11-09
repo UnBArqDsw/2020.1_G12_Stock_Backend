@@ -5,9 +5,6 @@ const routes = express.Router();
 
 const PATH = '/company/';
 
-routes.post(
-  PATH,
-  CompanyController.create
-);
+routes.post(PATH, CompanyController.create);
 
 export default routes;

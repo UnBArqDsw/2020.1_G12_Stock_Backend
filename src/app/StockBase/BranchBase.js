@@ -12,7 +12,7 @@ class BranchBase extends Base {
   }
 
   async listAll() {
-    const branchs = await super.findAll({attributes:['idBranch', 'name']});
+    const branchs = await super.findAll({ attributes: ['idBranch', 'name'] });
     return branchs;
   }
 }
