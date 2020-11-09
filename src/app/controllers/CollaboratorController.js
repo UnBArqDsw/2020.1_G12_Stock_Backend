@@ -60,7 +60,8 @@ class CollaboratorController {
     try {
       if (idAccessLevel || activate) {
         return res.status(403).json({
-          message: 'Não é possível editar nível de acesso ou status do colaborador.',
+          message:
+            'Não é possível editar nível de acesso ou status do colaborador.',
         });
       }
       const response = await CollaboratorBase.updateProfile(
