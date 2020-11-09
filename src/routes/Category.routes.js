@@ -16,11 +16,6 @@ routes.post(
   CategoryController.create
 );
 
-routes.get(
-  '/categories',
-  AuthorizationMiddleware,
-  AccessLevelMiddleware,
-  CategoryController.index
-);
+routes.get('/categories', AuthorizationMiddleware, CategoryController.index);
 
 export default routes;
