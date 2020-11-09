@@ -16,6 +16,7 @@ class CollaboratorModel extends Model {
         idCompany: Sequelize.NUMBER,
         name: Sequelize.STRING,
         document: Sequelize.STRING,
+        activate: Sequelize.BOOLEAN,
         password: Sequelize.STRING,
         photo: Sequelize.STRING,
         email: Sequelize.STRING,
