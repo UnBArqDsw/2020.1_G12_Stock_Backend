@@ -8,12 +8,10 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface) => {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.removeColumn('collaborators', 'activate', {
       type: Sequelize.BOOLEAN,
       allowNull: false,
     });
   },
 };
-
-
