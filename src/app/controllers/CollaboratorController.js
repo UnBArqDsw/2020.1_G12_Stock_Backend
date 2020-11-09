@@ -60,7 +60,7 @@ class CollaboratorController {
     try {
       if (idAccessLevel || activate) {
         return res.status(403).json({
-          message: 'Its not possible to update access level or status',
+          message: 'Não é possível editar nível de acesso ou status do colaborador.',
         });
       }
       const response = await CollaboratorBase.updateProfile(
@@ -71,9 +71,9 @@ class CollaboratorController {
       if (response)
         return res
           .status(200)
-          .json({ message: 'Collaborator updated successfully.' });
+          .json({ message: 'Colaborar editado com sucesso.' });
 
-      return res.status(400).json({ message: 'Error updating Collaborator.' });
+      return res.status(400).json({ message: 'Erro ao editar colaborador.' });
     } catch (error) {
       return res
         .status(error.status || 400)
@@ -87,7 +87,7 @@ class CollaboratorController {
     try {
       if (password) {
         return res.status(403).json({
-          message: 'Its not possible to update collaborator password',
+          message: 'Não é possível editar senha do colaborador.',
         });
       }
 
@@ -99,9 +99,9 @@ class CollaboratorController {
       if (response)
         return res
           .status(200)
-          .json({ message: 'Collaborator updated successfully.' });
+          .json({ message: 'Colaborar editado com sucesso.' });
 
-      return res.status(400).json({ message: 'Error updating Collaborator.' });
+      return res.status(400).json({ message: 'Erro ao editar colaborador.' });
     } catch (error) {
       return res
         .status(error.status || 400)

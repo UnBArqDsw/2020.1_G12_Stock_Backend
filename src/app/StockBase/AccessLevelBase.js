@@ -8,7 +8,6 @@ class AccessLevelBase extends Base {
 
   async listAll() {
     const accessLevel = await super.listAll();
-    console.log('Base' + accessLevel);
     return accessLevel;
   }
 }
