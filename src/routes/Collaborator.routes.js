@@ -18,4 +18,17 @@ routes.get(
 
 routes.post(PATH + '/auth', CollaboratorController.auth);
 
+routes.put(
+  PATH + '/update/profile/:idCollaborator',
+  AuthorizationMiddleware,
+  CollaboratorController.updateProfile
+);
+
+routes.put(
+  PATH + '/update/collaborator/:idCollaborator',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  CollaboratorController.updateCollaborator
+);
+
 export default routes;
