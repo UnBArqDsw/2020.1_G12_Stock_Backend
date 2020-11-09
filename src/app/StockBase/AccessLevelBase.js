@@ -6,6 +6,11 @@ class AccessLevelBase extends Base {
     super(AccessLevelModel);
   }
 
+  async listOne(idAccessLevel) {
+    const accessLevel = await super.findAll({ where: { idAccessLevel } });
+    return accessLevel;
+  }
+
   async listAll() {
     const accessLevel = await super.listAll();
     return accessLevel;

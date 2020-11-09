@@ -5,6 +5,8 @@ const routes = express.Router();
 
 const PATH = '/accessLevel';
 
-routes.get(PATH + '/list', AccessLevelController.index);
+routes.get(PATH + '/show/:idAccessLevel', AccessLevelController.index);
+
+routes.get(PATH + '/list', AccessLevelController.listAll);
 
 export default routes;
