@@ -2,7 +2,7 @@ import express from 'express';
 import ProductController from '../app/controllers/ProductController';
 import AuthorizationMiddleware from '../app/middlewares/Authorization';
 import AccessLevelMiddleware from '../app/middlewares/AccessLevel';
-import validateProductBody from '../app/middlewares/validation/product';
+import validateProductBody, {validateDecreaseProductBody} from '../app/middlewares/validation/product';
 
 const routes = express.Router();
 
@@ -28,6 +28,7 @@ routes.post(
 routes.post(
   PATH + '/decreases',
   AuthorizationMiddleware,
+  validateDecreaseProductBody,
   ProductController.decrease
 );
 

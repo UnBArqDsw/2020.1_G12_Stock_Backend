@@ -35,7 +35,7 @@ class ProductBase extends Base {
     body.idCompany = CollaboratorInfo.idCompany;
     const product = await super.create(body);
 
-    if (product && ProductInfo.categories.length) {
+    if (product && ProductInfo.categories) {
       await BelongsBase.create({
         idProduct: product.idProduct,
         idCategory: ProductInfo.categories,
@@ -74,10 +74,10 @@ class ProductBase extends Base {
     try {
       current_product_quantity = product.dataValues.quantity;
     } catch (error) {
-      throw Error('Produto não encontrado.');
+      throw { status: 404, message: 'Produto não encontrado.' };
     }
     if (quantity > current_product_quantity) {
-      throw Error('Quantidade indisponível para decremento.');
+      throw { status: 400, message: 'Quantidade indisponível para decremento.' };
     }
     for (const lot of lots) {
       let current_quantity = lot.productQty;
