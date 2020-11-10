@@ -25,7 +25,7 @@ const validateProductBody = (req, res, next) => {
 
 const DecreaseProductSchema = Joi.object({
   idProduct: Joi.number().integer().min(1).required(),
-  quantity: Joi.number().integer().min(1).required()
+  quantity: Joi.number().integer().min(1).required(),
 });
 
 export const validateDecreaseProductBody = (req, res, next) => {
@@ -38,7 +38,6 @@ export const validateDecreaseProductBody = (req, res, next) => {
     res.status(400).json({
       details: error.details.map((detail) => detail.message).join(', '),
     });
-    
   }
 };
 

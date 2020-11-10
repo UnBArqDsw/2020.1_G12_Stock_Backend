@@ -2,7 +2,7 @@ import Joi from '@hapi/joi';
 
 const CategorySchema = Joi.object({
   name: Joi.string().min(3).max(255).required(),
-  description: Joi.string().min(3).max(255).required(),
+  description: Joi.string().max(255).allow('').optional()
 });
 
 const validateProductBody = (req, res, next) => {

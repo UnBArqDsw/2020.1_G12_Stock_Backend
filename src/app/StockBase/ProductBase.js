@@ -77,7 +77,10 @@ class ProductBase extends Base {
       throw { status: 404, message: 'Produto não encontrado.' };
     }
     if (quantity > current_product_quantity) {
-      throw { status: 400, message: 'Quantidade indisponível para decremento.' };
+      throw {
+        status: 400,
+        message: 'Quantidade indisponível para decremento.',
+      };
     }
     for (const lot of lots) {
       let current_quantity = lot.productQty;
