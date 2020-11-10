@@ -34,6 +34,11 @@ class ColaboratorBase extends Base {
     return collaborators;
   }
 
+  async listCollaborator(idCollaborator) {
+    const collaborator = await super.findOne({ where: { idCollaborator } });
+    return collaborator;
+  }
+
   async auth(document, password) {
     const collaborator = await super.findOne({ where: { document } });
 

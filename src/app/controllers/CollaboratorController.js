@@ -30,6 +30,23 @@ class CollaboratorController {
     }
   }
 
+  async getCollaborator(req, res) {
+    const { idCollaborator } = req.params;
+
+    try {
+      const collaborator = await CollaboratorBase.listCollaborator(
+        idCollaborator
+      );
+      return res
+        .status(200)
+        .json(_.omit(collaborator.dataValues, ['password']));
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
   async auth(req, res) {
     const { document, password } = req.body;
 
