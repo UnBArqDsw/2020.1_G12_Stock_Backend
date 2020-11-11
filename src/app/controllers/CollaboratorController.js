@@ -13,8 +13,7 @@ class CollaboratorController {
   }
 
   async index(req, res) {
-    const { idCompany } = req.params;
-
+    const { idCompany } = req.collaborator;
     try {
       const collaborators = await CollaboratorBase.listAll(idCompany);
 

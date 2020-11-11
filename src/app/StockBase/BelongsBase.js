@@ -1,6 +1,5 @@
 import Base from './Base';
 import BelongsModel from '../models/Belongs';
-import CategoryModel from '../models/Category';
 
 class BelongsBase extends Base {
   constructor() {
@@ -8,20 +7,22 @@ class BelongsBase extends Base {
   }
 
   async create(BelongsInfo) {
-    let categories = BelongsInfo.idCategory;
-    const belongs = [];
+    const isCategoryArray = typeof BelongsInfo.idCategory === 'object';
+    let categories = isCategoryArray
+      ? BelongsInfo.idCategory
+      : [BelongsInfo.idCategory];
+
+    let belongs = [];
+
     for (const c of categories) {
-      const nameCategory = await CategoryModel.findOne({
-        where: { idCategory: c },
-      });
       const body = {
-        nameCategory: nameCategory.dataValues.name,
         idCategory: c,
         idProduct: BelongsInfo.idProduct,
       };
-      belongs.push(await super.create(body));
+      belongs.push(super.create(body));
     }
-    return belongs;
+    const promisses = await Promise.all(belongs);
+    return promisses;
   }
 
   async listAll(idProduct) {

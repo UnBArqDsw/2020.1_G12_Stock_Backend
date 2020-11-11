@@ -2,6 +2,7 @@ import express from 'express';
 import CategoryController from '../app/controllers/CategoryController';
 import AuthorizationMiddleware from '../app/middlewares/Authorization';
 import AccessLevelMiddleware from '../app/middlewares/AccessLevel';
+import validateCategoryBody from '../app/middlewares/validation/category';
 
 const routes = express.Router();
 
@@ -11,14 +12,10 @@ routes.post(
   PATH,
   AuthorizationMiddleware,
   AccessLevelMiddleware,
+  validateCategoryBody,
   CategoryController.create
 );
 
-routes.get(
-  '/categories/:idCompany',
-  AuthorizationMiddleware,
-  AccessLevelMiddleware,
-  CategoryController.index
-);
+routes.get('/categories', AuthorizationMiddleware, CategoryController.index);
 
 export default routes;

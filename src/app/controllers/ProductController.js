@@ -11,7 +11,7 @@ class ProductController {
   }
 
   async index(req, res) {
-    const { idCompany } = req.params;
+    const { idCompany } = req.collaborator;
 
     try {
       const products = await ProductBase.listAll(idCompany);
