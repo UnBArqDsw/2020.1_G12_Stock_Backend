@@ -16,6 +16,10 @@ routes.post(
   CategoryController.create
 );
 
-routes.get('/categories', AuthorizationMiddleware, CategoryController.index);
+routes.get(
+  '/categories/:idCompany',
+  AuthorizationMiddleware,
+  CategoryController.index
+);
 
 export default routes;

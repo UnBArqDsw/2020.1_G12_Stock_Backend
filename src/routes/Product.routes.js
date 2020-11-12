@@ -16,7 +16,11 @@ routes.post(
   ProductController.create
 );
 
-routes.get(PATH + 's', AuthorizationMiddleware, ProductController.index);
+routes.get(
+  PATH + 's/:idCompany',
+  AuthorizationMiddleware,
+  ProductController.index
+);
 
 routes.post(
   PATH + '/destroy',
