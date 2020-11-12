@@ -23,4 +23,22 @@ const validateLotBody = (req, res, next) => {
   }
 };
 
+const DecreaseLotSchema = Joi.object({
+  idLot: Joi.number().integer().min(1).required(),
+  quantity: Joi.number().integer().min(1).required(),
+});
+
+export const validateDecreaseLotBody = (req, res, next) => {
+  try {
+    const { error } = DecreaseLotSchema.validate(req.body);
+    if (error) throw error;
+
+    return next();
+  } catch (error) {
+    res.status(400).json({
+      details: error.details.map((detail) => detail.message).join(', '),
+    });
+  }
+};
+
 export default validateLotBody;
