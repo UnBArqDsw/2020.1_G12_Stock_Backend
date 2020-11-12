@@ -30,7 +30,7 @@ class LotBase extends Base {
     try {
       current_quantity = lot.dataValues.productQty;
     } catch (error) {
-      throw Error('Lot não encontrado.');
+      throw Error('Lote não encontrado.');
     }
     if (quantity > current_quantity) {
       throw Error('Quantidade indisponível para decremento.');

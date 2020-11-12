@@ -19,6 +19,11 @@ class DecreasesBase extends Base {
     const decreases = await super.create(body);
     return decreases;
   }
+
+  async listAll(idDecreasesType) {
+    const decreases = await super.findAll({ where: { idDecreasesType } });
+    return decreases;
+  }
 }
 
 export default new DecreasesBase();
