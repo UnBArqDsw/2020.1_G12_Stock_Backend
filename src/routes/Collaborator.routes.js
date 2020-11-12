@@ -16,6 +16,25 @@ routes.get(
   CollaboratorController.index
 );
 
+routes.get(
+  '/min'+PATH+'s',
+  AuthorizationMiddleware,
+  CollaboratorController.min
+);
+
+routes.get(
+  PATH,
+  AuthorizationMiddleware,
+  CollaboratorController.find
+);
+
+routes.get(
+  PATH+'/:idCollaborator',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  CollaboratorController.findByPk
+);
+
 routes.post(PATH + '/auth', CollaboratorController.auth);
 
 export default routes;
