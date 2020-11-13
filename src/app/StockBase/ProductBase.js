@@ -4,6 +4,7 @@ import LotBase from '../StockBase/LotBase';
 import DecreasesBase from '../StockBase/DecreasesBase';
 import BelongsBase from '../StockBase/BelongsBase';
 import CategoryBase from '../StockBase/CategoryBase';
+import { Op } from 'sequelize';
 
 class ProductBase extends Base {
   constructor() {
@@ -45,37 +46,34 @@ class ProductBase extends Base {
     return product;
   }
 
-  async listAll(idCompany) {
-    let products = await super.findAll({ where: { idCompany } });
+  async listAll(idCompany, idCategory, orderPrice) {
+    let query = { idCompany };
+    let order = [];
+
+    if (idCategory) {
+      const belongs = await BelongsBase.findAll({
+        where: { idCategory },
+        attributes: ['idProduct'],
+      });
+      query.idProduct = belongs.map((belong) => belong.idProduct);
+    }
+
+    if (orderPrice) {
+      order = [['salePrice', orderPrice]];
+    }
+
+    let products = await super.findAll({ where: query, order });
     const lotPromises = await Promise.all(
       products.map(async (product) =>
         LotBase.findAll({ idProduct: product.idProduct })
       )
     );
-    console.log('------categories------');
-    const categoriesPromises = await Promise.all(
-      products.map(async (product) => {
-        const belongs = await BelongsBase.findAll({
-          where: { idProduct: product.idProduct },
-        });
-        //um produto só
-        const categoryPromises = await Promise.all(
-          belongs.map(async (blgs) => {
-            let category = CategoryBase.findOne({
-              where: { idCategory: blgs.idCategory },
-            });
-            return category;
-          })
-        );
-        return categoryPromises;
-      })
-    );
-    console.log(products);
+
     products = products.map((product, i) => {
       product.dataValues.lots = lotPromises[i];
-      product.dataValues.categories = categoriesPromises[i];
       return product;
     });
+
     return products;
   }
 

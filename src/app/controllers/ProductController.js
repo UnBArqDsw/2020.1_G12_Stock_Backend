@@ -12,9 +12,11 @@ class ProductController {
 
   async index(req, res) {
     const { idCompany } = req.collaborator;
+    const { idCategory } = req.query;
+    const { orderPrice } = req.query;
 
     try {
-      const products = await ProductBase.listAll(idCompany);
+      const products = await ProductBase.listAll(idCompany, idCategory, orderPrice);
       return res.json(products);
     } catch (error) {
       return res
