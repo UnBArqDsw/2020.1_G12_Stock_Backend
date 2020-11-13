@@ -45,6 +45,7 @@ class DecreasesBase extends Base {
           attributes: ['name'],
         },
       ],
+      order: [['date', 'DESC']],
     });
     return decreases;
   }
