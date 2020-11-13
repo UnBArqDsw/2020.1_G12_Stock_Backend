@@ -16,6 +16,13 @@ routes.get(
   CollaboratorController.index
 );
 
+routes.get(
+  PATH + '/:idCollaborator',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  CollaboratorController.getCollaborator
+);
+
 routes.post(PATH + '/auth', CollaboratorController.auth);
 
 routes.put(
