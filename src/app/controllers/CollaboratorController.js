@@ -23,8 +23,7 @@ class CollaboratorController {
         )
       );
     } catch (error) {
-      return res
-        .status(error.status || 400)
+      return res.status(400)
         .json({ message: error.message || error });
     }
   }
@@ -36,6 +35,12 @@ class CollaboratorController {
       const collaborator = await CollaboratorBase.listCollaborator(
         idCollaborator
       );
+      if (collaborator === null) {
+        return res.status(404).json({
+          message:
+            'Colaborador não existente.',
+        });
+      }
       return res
         .status(200)
         .json(_.omit(collaborator.dataValues, ['password']));
