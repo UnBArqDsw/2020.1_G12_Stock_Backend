@@ -23,8 +23,7 @@ class CollaboratorController {
         )
       );
     } catch (error) {
-      return res.status(400)
-        .json({ message: error.message || error });
+      return res.status(400).json({ message: error.message || error });
     }
   }
 
@@ -37,8 +36,7 @@ class CollaboratorController {
       );
       if (collaborator === null) {
         return res.status(404).json({
-          message:
-            'Colaborador não existente.',
+          message: 'Colaborador não existente.',
         });
       }
       return res
