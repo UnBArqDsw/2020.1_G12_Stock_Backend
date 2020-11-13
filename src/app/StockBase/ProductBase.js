@@ -3,6 +3,7 @@ import ProductModel from '../models/Product';
 import LotBase from '../StockBase/LotBase';
 import DecreasesBase from '../StockBase/DecreasesBase';
 import BelongsBase from '../StockBase/BelongsBase';
+import CategoryBase from '../StockBase/CategoryBase';
 
 class ProductBase extends Base {
   constructor() {
@@ -46,13 +47,33 @@ class ProductBase extends Base {
 
   async listAll(idCompany) {
     let products = await super.findAll({ where: { idCompany } });
-    const lotPromisses = await Promise.all(
+    const lotPromises = await Promise.all(
       products.map(async (product) =>
         LotBase.findAll({ idProduct: product.idProduct })
       )
     );
+    console.log('------categories------');
+    const categoriesPromises = await Promise.all(
+      products.map(async (product) => {
+        const belongs = await BelongsBase.findAll({
+          where: { idProduct: product.idProduct },
+        });
+        //um produto só
+        const categoryPromises = await Promise.all(
+          belongs.map(async (blgs) => {
+            let category = CategoryBase.findOne({
+              where: { idCategory: blgs.idCategory },
+            });
+            return category;
+          })
+        );
+        return categoryPromises;
+      })
+    );
+    console.log(products);
     products = products.map((product, i) => {
-      product.dataValues.lots = lotPromisses[i];
+      product.dataValues.lots = lotPromises[i];
+      product.dataValues.categories = categoriesPromises[i];
       return product;
     });
     return products;
