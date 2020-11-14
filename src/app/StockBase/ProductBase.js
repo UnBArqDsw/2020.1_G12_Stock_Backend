@@ -46,13 +46,13 @@ class ProductBase extends Base {
     return product;
   }
 
-  async listAll(idCompany, idCategory, orderPrice) {
+  async listAll(idCompany, formatedFilterCategories, orderPrice) {
     let query = { idCompany };
     let order = [];
 
-    if (idCategory) {
+    if (formatedFilterCategories) {
       const belongs = await BelongsBase.findAll({
-        where: { idCategory },
+        where: { idCategory: formatedFilterCategories },
         attributes: ['idProduct'],
       });
       query.idProduct = belongs.map((belong) => belong.idProduct);

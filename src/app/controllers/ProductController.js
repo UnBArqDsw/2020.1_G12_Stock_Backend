@@ -12,11 +12,21 @@ class ProductController {
 
   async index(req, res) {
     const { idCompany } = req.collaborator;
-    const { idCategory } = req.query;
-    const { orderPrice } = req.query;
+    const { filterCategories, orderPrice } = req.query;
+    let formatedFilterCategories;
+
+    if (filterCategories) {
+      formatedFilterCategories = filterCategories
+        .split(',')
+        .map((categoryId) => Number(categoryId));
+    }
 
     try {
-      const products = await ProductBase.listAll(idCompany, idCategory, orderPrice);
+      const products = await ProductBase.listAll(
+        idCompany,
+        formatedFilterCategories,
+        orderPrice
+      );
       return res.json(products);
     } catch (error) {
       return res
