@@ -17,19 +17,15 @@ routes.get(
 );
 
 routes.get(
-  '/min'+PATH+'s',
+  '/min' + PATH + 's',
   AuthorizationMiddleware,
   CollaboratorController.min
 );
 
-routes.get(
-  PATH,
-  AuthorizationMiddleware,
-  CollaboratorController.find
-);
+routes.get(PATH, AuthorizationMiddleware, CollaboratorController.find);
 
 routes.get(
-  PATH+'/:idCollaborator',
+  PATH + '/:idCollaborator',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   CollaboratorController.findByPk
