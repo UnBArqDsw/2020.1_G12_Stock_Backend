@@ -3,8 +3,6 @@ import ProductModel from '../models/Product';
 import LotBase from '../StockBase/LotBase';
 import DecreasesBase from '../StockBase/DecreasesBase';
 import BelongsBase from '../StockBase/BelongsBase';
-import CategoryBase from '../StockBase/CategoryBase';
-import { Op } from 'sequelize';
 
 class ProductBase extends Base {
   constructor() {
