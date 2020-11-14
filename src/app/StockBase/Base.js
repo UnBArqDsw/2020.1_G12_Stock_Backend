@@ -19,6 +19,11 @@ class Base {
     return response;
   }
 
+  async listAll() {
+    const response = await this.modelBase.findAll();
+    return response;
+  }
+
   async update(data, where) {
     const response = await this.modelBase.update(data, where);
     return response;

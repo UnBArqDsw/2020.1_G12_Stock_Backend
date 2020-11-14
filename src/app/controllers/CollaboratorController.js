@@ -4,8 +4,9 @@ import _ from 'lodash';
 class CollaboratorController {
   async create(req, res) {
     try {
+      req.body.activate = true;
       const collaborator = await CollaboratorBase.create(req.body);
-      return res.json(collaborator);
+      return res.json(_.omit(collaborator.dataValues, ['password']));
     } catch (error) {
       return res.status(400).json({ message: error.message || error });
     }
@@ -15,7 +16,12 @@ class CollaboratorController {
     const { idCompany } = req.collaborator;
     try {
       const collaborators = await CollaboratorBase.listAll(idCompany);
-      return res.json(collaborators);
+
+      return res.json(
+        collaborators.map((collaborators) =>
+          _.omit(collaborators.dataValues, ['password'])
+        )
+      );
     } catch (error) {
       return res
         .status(error.status || 400)
@@ -26,7 +32,7 @@ class CollaboratorController {
   async find(req, res) {
     const { idCollaborator } = req.collaborator;
     try {
-      const response = await CollaboratorBase.findOne({idCollaborator});
+      const response = await CollaboratorBase.findOne({ idCollaborator });
       console.log(response.dataValues);
       return res.json(_.pick(response.dataValues, [
         'idCollaborator',
@@ -44,6 +50,7 @@ class CollaboratorController {
 
   async auth(req, res) {
     const { document, password } = req.body;
+
     try {
       const response = await CollaboratorBase.auth(document, password);
       return res
@@ -65,10 +72,10 @@ class CollaboratorController {
     }
   }
 
-  async findByPk(req, res){
-    const {idCollaborator} = req.params;
+  async findByPk(req, res) {
+    const { idCollaborator } = req.params;
     try {
-      const response = await CollaboratorBase.findOne({idCollaborator});
+      const response = await CollaboratorBase.findOne({ idCollaborator });
       console.log(response.dataValues);
       return res.json(_.pick(response.dataValues, [
         'idCollaborator',
@@ -83,14 +90,68 @@ class CollaboratorController {
         .json({ message: error.message || error });
     }
   }
+  async updateProfile(req, res) {
+    const { idCollaborator } = req.params;
+    const { idAccessLevel, activate } = req.body;
+    try {
+      if (idAccessLevel || activate) {
+        return res.status(403).json({
+          message:
+            'Não é possível editar nível de acesso ou status do colaborador.',
+        });
+      }
+      const response = await CollaboratorBase.updateProfile(
+        req.body,
+        idCollaborator
+      );
 
-  async min(req, res){
+      if (response)
+        return res
+          .status(200)
+          .json({ message: 'Colaborar editado com sucesso.' });
+
+      return res.status(400).json({ message: 'Erro ao editar colaborador.' });
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
+  async min(req, res) {
     const { idCompany } = req.collaborator;
     try {
-      
+
       const response = await CollaboratorBase.listAll(idCompany);
-      let collaborators = response.map((element)=>{return {idCollaborator: element.dataValues.idCollaborator, name: element.dataValues.name}});
+      let collaborators = response.map((element) => { return { idCollaborator: element.dataValues.idCollaborator, name: element.dataValues.name } });
       return res.json(collaborators);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+  async updateCollaborator(req, res) {
+    const { idCollaborator } = req.params;
+    const { password } = req.body;
+    try {
+      if (password) {
+        return res.status(403).json({
+          message: 'Não é possível editar senha do colaborador.',
+        });
+      }
+
+      const response = await CollaboratorBase.updateCollaborator(
+        req.body,
+        idCollaborator
+      );
+
+      if (response)
+        return res
+          .status(200)
+          .json({ message: 'Colaborar editado com sucesso.' });
+
+      return res.status(400).json({ message: 'Erro ao editar colaborador.' });
     } catch (error) {
       return res
         .status(error.status || 400)
