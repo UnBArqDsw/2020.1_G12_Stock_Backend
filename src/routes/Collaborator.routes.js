@@ -15,7 +15,6 @@ routes.get(
   AccessLevelMiddleware,
   CollaboratorController.index
 );
-
 routes.get(
   '/min' + PATH + 's',
   AuthorizationMiddleware,
@@ -23,12 +22,11 @@ routes.get(
 );
 
 routes.get(PATH, AuthorizationMiddleware, CollaboratorController.find);
-
 routes.get(
   PATH + '/:idCollaborator',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
-  CollaboratorController.findByPk
+  CollaboratorController.getCollaborator
 );
 
 routes.post(PATH + '/auth', CollaboratorController.auth);
