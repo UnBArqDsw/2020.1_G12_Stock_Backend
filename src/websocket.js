@@ -11,7 +11,6 @@ export const setUpSocket = (server) => {
 };
 
 export const findConnections = (idCompany) => {
-  console.log(idCompany);
   return connections.filter((connection) => connection.idCompany === idCompany);
 };
 

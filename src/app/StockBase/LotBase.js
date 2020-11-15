@@ -3,6 +3,7 @@ import LotModel from '../models/Lot';
 import DecreasesBase from './DecreasesBase';
 import ProductBase from './ProductBase';
 import Product from '../models/Product';
+import { findConnections, sendMessage } from '../../websocket';
 
 class LotBase extends Base {
   constructor() {
@@ -15,7 +16,19 @@ class LotBase extends Base {
     let body = LotInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
     const lot = await super.create(body);
-    await ProductBase.update({ idProduct: lot.idProduct });
+
+    let product = await ProductBase.findOne({
+      where: { idProduct: lot.dataValues.idProduct },
+    });
+
+    const productLots = await super.findAll({
+      where: { idProduct: product.idProduct },
+    });
+
+    product.dataValues.lots = [...productLots, lot];
+    const connections = findConnections(CollaboratorInfo.idCompany);
+    sendMessage('update-product', connections, product);
+
     return lot;
   }
 
