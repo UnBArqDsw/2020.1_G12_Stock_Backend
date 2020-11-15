@@ -13,10 +13,18 @@ class LotModel extends Model {
         idProduct: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: 'products',
+            key: 'idProduct',
+          },
         },
         idCollaborator: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: {
+            model: 'collaborator',
+            key: 'idCollaborator',
+          },
         },
         entryDate: {
           type: Sequelize.DATE,
@@ -50,6 +58,13 @@ class LotModel extends Model {
       { sequelize: connection, tableName: 'lots' }
     );
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.ProductModel, {
+      foreignKey: 'idProduct',
+      as: 'product',
+    });
   }
 }
 

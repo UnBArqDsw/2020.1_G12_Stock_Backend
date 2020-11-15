@@ -7,7 +7,7 @@ module.exports = {
       [
         {
           idAccessLevel: 1,
-          name: 'Owner',
+          name: 'Gestor(a)',
           description:
             'Dono do negócio. Possui todos os níveis de acesso da aplicação.',
           createdAt: new Date(),
@@ -15,7 +15,7 @@ module.exports = {
         },
         {
           idAccessLevel: 2,
-          name: 'Manager',
+          name: 'Administrador(a)',
           description:
             'Gerente. Possui todos os níveis de acesso da aplicação, mas pode ser removido pelo owner',
           createdAt: new Date(),
@@ -23,7 +23,7 @@ module.exports = {
         },
         {
           idAccessLevel: 3,
-          name: 'Seller',
+          name: 'Vendedor(a)',
           description:
             'Vendedor. Pessoa que vende ou é responsável pelas vendas.',
           createdAt: new Date(),

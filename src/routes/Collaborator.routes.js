@@ -17,24 +17,33 @@ routes.get(
 );
 
 routes.get(
-  '/min'+PATH+'s',
+  '/min' + PATH + 's',
   AuthorizationMiddleware,
   CollaboratorController.min
 );
 
-routes.get(
-  PATH,
-  AuthorizationMiddleware,
-  CollaboratorController.find
-);
+routes.get(PATH, AuthorizationMiddleware, CollaboratorController.find);
 
 routes.get(
-  PATH+'/:idCollaborator',
+  PATH + '/:idCollaborator',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
-  CollaboratorController.findByPk
+  CollaboratorController.getCollaborator
 );
 
 routes.post(PATH + '/auth', CollaboratorController.auth);
+
+routes.put(
+  PATH + '/update/profile/:idCollaborator',
+  AuthorizationMiddleware,
+  CollaboratorController.updateProfile
+);
+
+routes.put(
+  PATH + '/update/collaborator/:idCollaborator',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  CollaboratorController.updateCollaborator
+);
 
 export default routes;

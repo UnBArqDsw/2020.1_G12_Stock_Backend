@@ -1,6 +1,9 @@
 import Base from './Base';
 import DecreasesModel from '../models/Decreases';
 import LotBase from '../StockBase/LotBase';
+import Lot from '../models/Lot';
+import Product from '../models/Product';
+import Collaborator from '../models/Collaborator';
 
 class DecreasesBase extends Base {
   constructor() {
@@ -17,6 +20,33 @@ class DecreasesBase extends Base {
     body.time = date.toLocaleTimeString();
 
     const decreases = await super.create(body);
+    return decreases;
+  }
+
+  async listAll(idDecreasesType) {
+    const decreases = await super.findAll({
+      where: { idDecreasesType },
+      include: [
+        {
+          model: Lot,
+          as: 'lot',
+          attributes: ['idLot', 'idProduct'],
+          include: [
+            {
+              model: Product,
+              as: 'product',
+              attributes: ['name', 'salePrice'],
+            },
+          ],
+        },
+        {
+          model: Collaborator,
+          as: 'collaborator',
+          attributes: ['name'],
+        },
+      ],
+      order: [['date', 'DESC']],
+    });
     return decreases;
   }
 }
