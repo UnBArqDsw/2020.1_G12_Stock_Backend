@@ -5,12 +5,18 @@ let io;
 export const setUpSocket = (server) => {
   io = socketio(server);
   io.on('connection', (socket) => {
-    connections.push(socket.id);
+    const { idCompany } = socket.handshake.query;
+    connections.push({ id: socket.id, idCompany: Number(idCompany) });
   });
 };
 
-export const sendMessage = (message, data) => {
-  connections.forEach((connection) => {
-    io.to(connection).emit(message, data);
+export const findConnections = (idCompany) => {
+  console.log(idCompany);
+  return connections.filter((connection) => connection.idCompany === idCompany);
+};
+
+export const sendMessage = (message, clientsToUpdate, data) => {
+  clientsToUpdate.forEach((connection) => {
+    io.to(connection.id).emit(message, data);
   });
 };

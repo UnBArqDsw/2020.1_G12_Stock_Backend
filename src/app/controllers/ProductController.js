@@ -1,11 +1,13 @@
 import ProductBase from '../StockBase/ProductBase';
-import { sendMessage } from '../../websocket';
+import { sendMessage, findConnections } from '../../websocket';
 
 class ProductController {
   async create(req, res) {
     try {
       const product = await ProductBase.create(req.body, req.collaborator);
-      sendMessage('new-product', product);
+
+      const clientsToUpdate = findConnections(req.collaborator.idCompany);
+      sendMessage('new-product', clientsToUpdate, product);
 
       return res.json(product);
     } catch (error) {
