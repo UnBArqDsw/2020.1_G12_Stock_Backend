@@ -5,6 +5,12 @@ let io;
 export const setUpSocket = (server) => {
   io = socketio(server);
   io.on('connection', (socket) => {
-    console.log('new socket connected!', socket);
+    connections.push(socket.id);
+  });
+};
+
+export const sendMessage = (message, data) => {
+  connections.forEach((connection) => {
+    io.to(connection).emit(message, data);
   });
 };
