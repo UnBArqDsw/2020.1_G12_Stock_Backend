@@ -48,7 +48,7 @@ class ProductBase extends Base {
 
   async listAll(idCompany, formatedFilterCategories, orderPrice) {
     let query = { idCompany };
-    let order = [];
+    let order = [['updatedAt', 'DESC']];
 
     if (formatedFilterCategories) {
       const belongs = await BelongsBase.findAll({
