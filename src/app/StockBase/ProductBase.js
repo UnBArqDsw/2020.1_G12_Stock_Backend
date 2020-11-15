@@ -33,7 +33,7 @@ class ProductBase extends Base {
     let body = ProductInfo;
     body.idCollaborator = CollaboratorInfo.idCollaborator;
     body.idCompany = CollaboratorInfo.idCompany;
-    const product = await super.create(body);
+    let product = await super.create(body);
 
     if (product && ProductInfo.categories.length) {
       await BelongsBase.create({
@@ -41,6 +41,8 @@ class ProductBase extends Base {
         idCategory: ProductInfo.categories,
       });
     }
+    product.dataValues.lots = [];
+
     return product;
   }
 
