@@ -57,6 +57,18 @@ class DecreasesModel extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.LotModel, {
+      foreignKey: 'idLot',
+      as: 'lot',
+    });
+
+    this.belongsTo(models.CollaboratorModel, {
+      foreignKey: 'idCollaborator',
+      as: 'collaborator',
+    });
+  }
 }
 
 export default DecreasesModel;

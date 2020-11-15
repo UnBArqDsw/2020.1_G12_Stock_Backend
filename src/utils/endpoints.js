@@ -4,6 +4,10 @@ export default function endpoints() {
   const category = '/api/category';
   const lot = '/api/lot';
   const belongs = '/api/belongs';
+  const accesslevel = '/api/accesslevel';
+  const branch = '/api/branch';
+  const company = '/api/company';
+  const decreases = '/api/decreases';
 
   const endpoints = [
     {
@@ -35,7 +39,7 @@ export default function endpoints() {
         },
         {
           type: 'GET',
-          endpoint: `${collaborator}s/:idCompany`,
+          endpoint: `${collaborator}s/`,
           parameters: [
             {
               idCompany: 'Integer',
@@ -43,6 +47,16 @@ export default function endpoints() {
           ],
           description:
             'Returns a list of all collaborators of a specific Company.',
+        },
+        {
+          type: 'GET',
+          endpoint: `${collaborator}/:idCollaborator`,
+          parameters: [
+            {
+              idCollaborator: 'Integer',
+            },
+          ],
+          description: 'Returns a specific collaborator.',
         },
         {
           type: 'PUT',
@@ -72,7 +86,7 @@ export default function endpoints() {
           parameters: [
             {
               name: 'String',
-              unitQtd: 'Integer',
+              unitQty: 'Integer',
               unitMeasure: 'String',
               salePrice: 'Integer',
             },
@@ -99,11 +113,11 @@ export default function endpoints() {
               quantity: 'Integer',
             },
           ],
-          description: 'Decreases qtd from spcefic product. Sell the product',
+          description: 'Decreases qty from spcefic product. Sell the product',
         },
         {
           type: 'GET',
-          endpoint: `${product}s/:idCompany`,
+          endpoint: `${product}s/`,
           parameters: [
             {
               idCompany: 'Integer',
@@ -126,7 +140,7 @@ export default function endpoints() {
         },
         {
           type: 'GET',
-          endpoint: `categories/:idCompany`,
+          endpoint: `categories/`,
           parameters: [
             {
               idCompany: 'Integer',
@@ -144,7 +158,7 @@ export default function endpoints() {
               idProduct: 'Integer',
               entryDate: 'String',
               dueDate: 'String',
-              productQtd: 'Integer',
+              productQty: 'Integer',
               description: 'String',
               purchasePrice: 'Integer',
             },
@@ -165,13 +179,13 @@ export default function endpoints() {
         },
         {
           type: 'GET',
-          endpoint: `${lot}s/:idCompany`,
+          endpoint: `${lot}s/:idProduct`,
           parameters: [
             {
-              idCompany: 'Integer',
+              idProduct: 'Integer',
             },
           ],
-          description: 'Return a list of all lots of a specific company',
+          description: 'Return a list of all lots of a specific product',
         },
       ],
       belongs: [
@@ -195,6 +209,61 @@ export default function endpoints() {
             },
           ],
           description: 'Return a list of all categories of a specific product.',
+        },
+      ],
+      accesslevel: [
+        {
+          type: 'GET',
+          endpoint: `${accesslevel}/list`,
+          description: 'Return a list of all access levels.',
+        },
+        {
+          type: 'GET',
+          endpoint: `${accesslevel}/show/:idAccessLevel`,
+          parameters: [
+            {
+              idAccessLevel: 'Integer',
+            },
+          ],
+          description: 'Return a specific access level data.',
+        },
+      ],
+      branch: [
+        {
+          type: 'GET',
+          endpoint: `${branch}`,
+          description: 'Return a list of all branches of companies.',
+        },
+      ],
+      company: [
+        {
+          type: 'POST',
+          endpoint: `${company}`,
+          parameters: [
+            {
+              document: 'String',
+              name: 'String',
+              telephone: 'Integer',
+              email: 'String',
+              photo: 'String',
+              maxQtdCollaborator: 'Integer',
+              idBranch: 'Integer',
+              registerDate: 'String',
+            },
+          ],
+          description: 'Creates new company.',
+        },
+      ],
+      decreases: [
+        {
+          type: 'GET',
+          endpoint: `${decreases}/:idDecreasesType`,
+          parameters: [
+            {
+              idDecreasesType: 'Integer',
+            },
+          ],
+          description: 'Return a list of sell history data.',
         },
       ],
     },

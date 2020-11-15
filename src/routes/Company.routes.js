@@ -3,7 +3,7 @@ import CompanyController from '../app/controllers/CompanyController';
 
 const routes = express.Router();
 
-const PATH = '/company/';
+const PATH = '/company';
 
 routes.post(PATH, CompanyController.create);
 
