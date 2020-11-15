@@ -40,5 +40,4 @@ export const validateDecreaseLotBody = (req, res, next) => {
     });
   }
 };
-
 export default validateLotBody;

@@ -139,7 +139,6 @@ class CollaboratorController {
         .json({ message: error.message || error });
     }
   }
-
   async updateCollaborator(req, res) {
     const { idCollaborator } = req.params;
     const { password } = req.body;

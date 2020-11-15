@@ -40,5 +40,4 @@ export const validateDecreaseProductBody = (req, res, next) => {
     });
   }
 };
-
 export default validateProductBody;
