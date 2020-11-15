@@ -44,17 +44,34 @@ class ProductBase extends Base {
     return product;
   }
 
-  async listAll(idCompany) {
-    let products = await super.findAll({ where: { idCompany } });
-    const lotPromisses = await Promise.all(
+  async listAll(idCompany, formatedFilterCategories, orderPrice) {
+    let query = { idCompany };
+    let order = [];
+
+    if (formatedFilterCategories) {
+      const belongs = await BelongsBase.findAll({
+        where: { idCategory: formatedFilterCategories },
+        attributes: ['idProduct'],
+      });
+      query.idProduct = belongs.map((belong) => belong.idProduct);
+    }
+
+    if (orderPrice) {
+      order = [['salePrice', orderPrice]];
+    }
+
+    let products = await super.findAll({ where: query, order });
+    const lotPromises = await Promise.all(
       products.map(async (product) =>
         LotBase.findAll({ idProduct: product.idProduct })
       )
     );
+
     products = products.map((product, i) => {
-      product.dataValues.lots = lotPromisses[i];
+      product.dataValues.lots = lotPromises[i];
       return product;
     });
+
     return products;
   }
 
