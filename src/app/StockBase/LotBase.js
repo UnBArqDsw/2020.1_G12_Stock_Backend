@@ -2,6 +2,7 @@ import Base from './Base';
 import LotModel from '../models/Lot';
 import DecreasesBase from './DecreasesBase';
 import ProductBase from './ProductBase';
+import Product from '../models/Product';
 
 class LotBase extends Base {
   constructor() {
@@ -19,7 +20,16 @@ class LotBase extends Base {
   }
 
   async listAll(idProduct) {
-    const lots = await super.findAll({ where: { idProduct } });
+    const lots = await super.findAll({
+      where: { idProduct },
+      include: [
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['name', 'salePrice'],
+        },
+      ],
+    });
     return lots;
   }
 
@@ -30,7 +40,7 @@ class LotBase extends Base {
     try {
       current_quantity = lot.dataValues.productQty;
     } catch (error) {
-      throw Error('Lot não encontrado.');
+      throw Error('Lote não encontrado.');
     }
     if (quantity > current_quantity) {
       throw Error('Quantidade indisponível para decremento.');
