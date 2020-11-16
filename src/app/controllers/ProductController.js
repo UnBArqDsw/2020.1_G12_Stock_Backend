@@ -6,7 +6,7 @@ class ProductController {
     try {
       const product = await ProductBase.create(req.body, req.collaborator);
 
-      const clientsToUpdate = findConnections(req.collaborator.idCompany);
+      const clientsToUpdate = await findConnections(req.collaborator.idCompany);
       sendMessage('new-product', clientsToUpdate, product);
 
       return res.json(product);

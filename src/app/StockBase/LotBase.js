@@ -26,7 +26,7 @@ class LotBase extends Base {
     });
 
     product.dataValues.lots = [...productLots, lot];
-    const connections = findConnections(CollaboratorInfo.idCompany);
+    const connections = await findConnections(CollaboratorInfo.idCompany);
     sendMessage('update-product', connections, product);
 
     return lot;
