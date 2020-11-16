@@ -21,7 +21,7 @@ class App {
     this.app.use(
       cors({
         exposedHeaders: 'x-auth-token',
-        origin: 'http://localhost:3000',
+        origin: '*',
         allowedHeaders: '*',
       })
     );
