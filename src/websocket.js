@@ -13,6 +13,11 @@ export const setUpSocket = (server) => {
       idCompany: Number(idCompany),
     };
     saveConnection(newConnection);
+
+    socket.on('disconnect', () => {
+      console.log('disconnect connection ' + socket.id);
+      removeConnection(socket.id);
+    });
   });
 };
 
@@ -39,6 +44,17 @@ const saveConnection = async (newConnection) => {
     console.log(error);
   }
 };
+const removeConnection = async (connectionToRemove) => {
+  try {
+    const activeConnections = await getRedisByKey('connections');
+    const newConnections = activeConnections.filter(
+      (connection) => connection.id !== connectionToRemove
+    );
+    setRedisByKey('connections', newConnections);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getRedisByKey = (key) => {
   return new Promise((resolve, reject) => {
@@ -55,6 +71,6 @@ const getRedisByKey = (key) => {
 
 const setRedisByKey = (key, data) => {
   database.redisClient.set(key, JSON.stringify(data), (err, reply) => {
-    if (reply === 'OK') console.log(key, 'saved to redis');
+    if (reply === 'OK') console.log(key, 'set to redis');
   });
 };
