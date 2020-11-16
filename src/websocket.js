@@ -24,7 +24,6 @@ export const findConnections = async (idCompany) => {
 };
 
 export const sendMessage = (message, clientsToUpdate, data) => {
-  console.log(message, clientsToUpdate, data);
   clientsToUpdate.forEach((connection) => {
     io.to(connection.id).emit(message, data);
   });
