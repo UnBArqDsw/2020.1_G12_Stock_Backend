@@ -20,4 +20,10 @@ routes.get(
   BelongsController.index
 );
 
+routes.get(
+  PATH + '/productsByCategory/:idCategory',
+  AuthorizationMiddleware,
+  BelongsController.indexCategories
+);
+
 export default routes;

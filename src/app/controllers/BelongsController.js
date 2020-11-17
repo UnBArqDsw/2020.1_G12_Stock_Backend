@@ -21,6 +21,18 @@ class BelongsController {
         .json({ message: error.message || error });
     }
   }
+
+  async indexCategories(req, res) {
+    const { idCategory } = req.params;
+    try {
+      const products = await BelongsBase.listProductsByCategory(idCategory);
+      return res.json(products);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
 }
 
 export default new BelongsController();
