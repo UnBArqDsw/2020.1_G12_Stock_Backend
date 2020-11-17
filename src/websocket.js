@@ -37,8 +37,9 @@ export const sendMessage = (message, clientsToUpdate, data) => {
 const saveConnection = async (newConnection) => {
   try {
     const activeConnections = await getRedisByKey('connections');
-    const newConnections = [...activeConnections, newConnection];
-
+    const newConnections = activeConnections
+      ? [...activeConnections, newConnection]
+      : [newConnection];
     setRedisByKey('connections', newConnections);
   } catch (error) {
     console.log(error);
@@ -59,12 +60,8 @@ const removeConnection = async (connectionToRemove) => {
 const getRedisByKey = (key) => {
   return new Promise((resolve, reject) => {
     database.redisClient.get(key, (err, reply) => {
-      if (err) {
-        reject(err);
-      }
-      if (reply) {
-        resolve(JSON.parse(reply));
-      }
+      if (err) reject(err);
+      resolve(JSON.parse(reply));
     });
   });
 };

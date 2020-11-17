@@ -25,7 +25,7 @@ class LotBase extends Base {
       where: { idProduct: product.idProduct },
     });
 
-    product.dataValues.lots = [...productLots, lot];
+    product.dataValues.lots = productLots;
     const connections = await findConnections(CollaboratorInfo.idCompany);
     sendMessage('update-product', connections, product);
 
