@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
+import redis from 'redis';
 import databaseConfig from '../config/database';
+import redisConfig from '../config/redis';
 import BranchModel from '../app/models/Branch';
 import AccessLevelModel from '../app/models/AccessLevel';
 import CollaboratorModel from '../app/models/Collaborator';
@@ -26,6 +28,7 @@ const models = [
 class Database {
   constructor() {
     this.init();
+    this.initRedisDB();
   }
 
   init() {
@@ -35,6 +38,13 @@ class Database {
       .map(
         (model) => model.associate && model.associate(this.connection.models)
       );
+  }
+
+  initRedisDB() {
+    this.redisClient = redis.createClient(redisConfig);
+    this.redisClient.on('connect', () => {
+      console.log('Redis connected!');
+    });
   }
 }
 
