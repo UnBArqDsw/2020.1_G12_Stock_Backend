@@ -35,10 +35,17 @@ class BelongsController {
         let products = await BelongsBase.listProductsByCategory(
           categories[i].idCategory
         );
-        categoryArray.push(products.length);
+        categoryArray.push({
+          value: products.length,
+          name: categories[i].name,
+        });
       }
 
-      return res.json(categoryArray);
+      return res.json(
+        categoryArray.sort((a, b) => {
+          return b.value - a.value;
+        })
+      );
     } catch (error) {
       return res
         .status(error.status || 400)
