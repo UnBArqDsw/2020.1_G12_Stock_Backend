@@ -68,9 +68,13 @@ class LotBase extends Base {
     DecreasesInfo.idDecreasesType = 1;
     await this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
 
-    const product = await ProductBase.updateProductLotQuantity({
+    let product = await ProductBase.updateProductLotQuantity({
       idProduct: updated_lot.idProduct,
     });
+    const productLots = await super.findAll({
+      where: { idProduct: product.idProduct },
+    });
+    product.dataValues.lots = productLots;
     const connections = await findConnections(CollaboratorInfo.idCompany);
     sendMessage('update-product', connections, product);
 
