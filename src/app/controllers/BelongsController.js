@@ -1,4 +1,5 @@
 import BelongsBase from '../StockBase/BelongsBase';
+import CategoryBase from '../StockBase/CategoryBase';
 
 class BelongsController {
   async create(req, res) {
@@ -23,10 +24,21 @@ class BelongsController {
   }
 
   async indexCategories(req, res) {
-    const { idCategory } = req.params;
+    console.log('entrou');
+    const { idCompany } = req.collaborator;
+    let categoryArray = [];
+
     try {
-      const products = await BelongsBase.listProductsByCategory(idCategory);
-      return res.json(products);
+      const categories = await CategoryBase.listAll(idCompany);
+
+      for (let i in categories) {
+        let products = await BelongsBase.listProductsByCategory(
+          categories[i].idCategory
+        );
+        categoryArray.push(products.length);
+      }
+
+      return res.json(categoryArray);
     } catch (error) {
       return res
         .status(error.status || 400)

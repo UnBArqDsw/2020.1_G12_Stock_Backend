@@ -15,15 +15,15 @@ routes.post(
 );
 
 routes.get(
-  PATH + '/:idProduct',
+  PATH + '/productsByCategory',
   AuthorizationMiddleware,
-  BelongsController.index
+  BelongsController.indexCategories
 );
 
 routes.get(
-  PATH + '/productsByCategory/:idCategory',
+  PATH + '/:idProduct',
   AuthorizationMiddleware,
-  BelongsController.indexCategories
+  BelongsController.index
 );
 
 export default routes;
