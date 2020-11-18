@@ -17,11 +17,7 @@ class CollaboratorController {
     try {
       const collaborators = await CollaboratorBase.listAll(idCompany);
 
-      return res.json(
-        collaborators.map((collaborators) =>
-          _.omit(collaborators.dataValues, ['password'])
-        )
-      );
+      return res.json(collaborators);
     } catch (error) {
       return res.status(400).json({ message: error.message || error });
     }
@@ -122,23 +118,6 @@ class CollaboratorController {
     }
   }
 
-  async min(req, res) {
-    const { idCompany } = req.collaborator;
-    try {
-      const response = await CollaboratorBase.listAll(idCompany);
-      let collaborators = response.map((element) => {
-        return {
-          idCollaborator: element.dataValues.idCollaborator,
-          name: element.dataValues.name,
-        };
-      });
-      return res.json(collaborators);
-    } catch (error) {
-      return res
-        .status(error.status || 400)
-        .json({ message: error.message || error });
-    }
-  }
   async updateCollaborator(req, res) {
     const { idCollaborator } = req.params;
     const { password } = req.body;

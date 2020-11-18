@@ -12,21 +12,22 @@ class ProductBase extends Base {
     this.DecreasesBase = DecreasesBase;
   }
 
-  async update(ProductInfo) {
+  async updateProductLotQuantity(ProductInfo) {
     const idProduct = ProductInfo.idProduct;
     const lots = await this.LotBase.findAll({ idProduct });
     var quantity = 0;
     for (const lot of lots) {
       quantity += lot.productQty;
     }
-    const product = {
-      idProduct: idProduct,
-      quantity: quantity,
-    };
-    const updated_product = super.update(product, {
+
+    const product_to_update = await super.findOne({
       where: { idProduct: idProduct },
     });
-    return updated_product;
+
+    product_to_update.quantity = quantity;
+    product_to_update.save();
+
+    return product_to_update;
   }
 
   async create(ProductInfo, CollaboratorInfo) {
@@ -136,10 +137,14 @@ class ProductBase extends Base {
       }
     }
 
-    await this.update({ idProduct: idProduct });
-    const updated_product = await super.findOne({
-      where: { idProduct: idProduct },
+    const updated_product = await this.updateProductLotQuantity({
+      idProduct: idProduct,
     });
+
+    const productLots = await this.LotBase.findAll({ idProduct });
+
+    updated_product.dataValues.lots = productLots;
+
     return updated_product;
   }
 }

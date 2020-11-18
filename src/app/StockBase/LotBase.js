@@ -17,14 +17,14 @@ class LotBase extends Base {
     body.idCollaborator = CollaboratorInfo.idCollaborator;
     const lot = await super.create(body);
 
-    let product = await ProductBase.findOne({
-      where: { idProduct: lot.dataValues.idProduct },
+    const product = await ProductBase.updateProductLotQuantity({
+      idProduct: lot.idProduct,
     });
+    console.log(product);
 
     const productLots = await super.findAll({
       where: { idProduct: product.idProduct },
     });
-
     product.dataValues.lots = productLots;
     const connections = await findConnections(CollaboratorInfo.idCompany);
     sendMessage('update-product', connections, product);
@@ -68,7 +68,11 @@ class LotBase extends Base {
     DecreasesInfo.idDecreasesType = 1;
     await this.DecreasesBase.create(DecreasesInfo, CollaboratorInfo);
 
-    await ProductBase.update({ idProduct: updated_lot.idProduct });
+    const product = await ProductBase.updateProductLotQuantity({
+      idProduct: updated_lot.idProduct,
+    });
+    const connections = await findConnections(CollaboratorInfo.idCompany);
+    sendMessage('update-product', connections, product);
 
     return updated_lot;
   }
