@@ -22,6 +22,19 @@ class DecreasesController {
         .json({ message: error.message || error });
     }
   }
+
+  async listDaySales(req, res) {
+    const { date } = req.params;
+    try {
+      const decreases = await DecreasesBase.listDaySales(date);
+
+      return res.json(decreases);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
 }
 
 export default new DecreasesController();

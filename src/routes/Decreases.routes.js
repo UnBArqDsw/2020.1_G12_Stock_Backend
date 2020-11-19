@@ -8,6 +8,13 @@ const routes = express.Router();
 const PATH = '/decreases';
 
 routes.get(
+  PATH + '/daySales/:date',
+  AuthorizationMiddleware,
+  AccessLevelMiddleware,
+  DecreasesController.listDaySales
+);
+
+routes.get(
   PATH + '/:idDecreasesType',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
