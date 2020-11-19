@@ -1,5 +1,8 @@
 import app from './app';
+import http from 'http';
+import { setUpSocket } from './websocket';
 
 const PORT = 8000;
-const HOST = '0.0.0.0';
-app.listen(PORT, HOST);
+const server = http.Server(app);
+setUpSocket(server);
+server.listen(PORT);
