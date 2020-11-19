@@ -1,4 +1,5 @@
 import DecreasesBase from '../StockBase/DecreasesBase';
+import moment from 'moment';
 
 class DecreasesController {
   async create(req, res) {
@@ -24,11 +25,28 @@ class DecreasesController {
   }
 
   async listDaySales(req, res) {
-    const { date } = req.params;
-    try {
-      const decreases = await DecreasesBase.listDaySales(date);
+    let salesData = [];
+    let date = '';
+    const month = moment().format('MMM');
 
-      return res.json(decreases);
+    try {
+      console.log(moment().endOf('month').format('DD'));
+      for (let i = 0; i < moment().endOf('month').format('DD'); i++) {
+        i < 9
+          ? (date = `${moment().format('YYYY')}-${moment().format('MM')}-0${
+              i + 1
+            }T00:00:00.000Z`)
+          : (date = `${moment().format('YYYY')}-${moment().format('MM')}-${
+              i + 1
+            }T00:00:00.000Z`);
+        let decreases = await DecreasesBase.listDaySales(date);
+        console.log(i);
+        salesData.push({
+          name: i + 1 + ' ' + month,
+          Vendas: decreases.length,
+        });
+      }
+      return res.json(salesData);
     } catch (error) {
       return res
         .status(error.status || 400)

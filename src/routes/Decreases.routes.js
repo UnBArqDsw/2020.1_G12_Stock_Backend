@@ -8,7 +8,7 @@ const routes = express.Router();
 const PATH = '/decreases';
 
 routes.get(
-  PATH + '/daySales/:date',
+  PATH + '/daySales',
   AuthorizationMiddleware,
   AccessLevelMiddleware,
   DecreasesController.listDaySales

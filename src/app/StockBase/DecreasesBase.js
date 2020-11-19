@@ -51,6 +51,7 @@ class DecreasesBase extends Base {
   }
 
   async listDaySales(date) {
+    console.log(date);
     const decreases = await super.findAll({
       where: { idDecreasesType: 2, date },
     });
