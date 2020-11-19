@@ -40,7 +40,6 @@ class DecreasesController {
               i + 1
             }T00:00:00.000Z`);
         let decreases = await DecreasesBase.listDaySales(date);
-        console.log(i);
         salesData.push({
           name: i + 1 + ' ' + month,
           Vendas: decreases.length,
