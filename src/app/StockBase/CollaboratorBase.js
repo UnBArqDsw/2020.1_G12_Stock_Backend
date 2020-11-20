@@ -13,16 +13,20 @@ class ColaboratorBase extends Base {
     if (collaboratorInfo.companyDocument) {
       const idCompany = await CompanyBase.getIdByCpfCnpj(collaboratorInfo);
       const collaborators = await this.listAll(idCompany);
-      if (collaborators.length == 0) {
-        collaboratorInfo.idCompany = idCompany;
-        collaboratorInfo.idAccessLevel = 1;
-        const collaborator = await super.create(collaboratorInfo);
-        return collaborator;
-      } else {
-        collaboratorInfo.idCompany = idCompany;
-        collaboratorInfo.idAccessLevel = 3;
-        const collaborator = await super.create(collaboratorInfo);
-        return collaborator;
+      try{
+        if (collaborators.length == 0) {
+          collaboratorInfo.idCompany = idCompany;
+          collaboratorInfo.idAccessLevel = 1;
+          const collaborator = await super.create(collaboratorInfo);
+          return collaborator;
+        } else {
+          collaboratorInfo.idCompany = idCompany;
+          collaboratorInfo.idAccessLevel = 3;
+          const collaborator = await super.create(collaboratorInfo);
+          return collaborator;
+        }
+      }catch(error){
+        throw { status: 400, message: error.errors[0].message};
       }
     }
     const collaborator = await super.create(collaboratorInfo);
@@ -72,11 +76,11 @@ class ColaboratorBase extends Base {
       ],
     });
 
-    if (collaborator.dataValues.activate == false)
-      throw { status: 403, message: 'Usuário não autorizado' };
-
     if (!collaborator)
       throw { status: 401, message: 'Verifique seu documento e senha' };
+
+    if (collaborator.dataValues.activate == false)
+      throw { status: 403, message: 'Usuário não autorizado' };
 
     const isPasswordValid = await collaborator.verifyPassword(password);
 
