@@ -6,7 +6,9 @@ const CreateCompanySchema = Joi.object({
   telephone: Joi.string().max(11).min(10).required(),
   idBranch: Joi.number().integer().required().min(1),
   name: Joi.string().required().min(3).max(255),
-  document: Joi.string().regex(/\d{11}/).required()
+  document: Joi.string()
+    .regex(/\d{11}/)
+    .required(),
 });
 
 const validateCreateCompanyBody = (req, res, next) => {

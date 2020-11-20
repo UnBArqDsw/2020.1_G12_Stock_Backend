@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.changeColumn('companies', 'telephone', { 
+    await queryInterface.changeColumn('companies', 'telephone', {
       type: Sequelize.STRING(11),
       allowNull: false,
     });
@@ -13,5 +13,5 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     });
-  }
+  },
 };

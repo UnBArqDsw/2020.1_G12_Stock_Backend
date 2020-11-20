@@ -7,15 +7,15 @@ class CompanyBase extends Base {
   }
 
   async create(CompanyInfo) {
-    try{
+    try {
       let date = new Date();
       CompanyInfo.registerDate =
         date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 
       const company = await super.create(CompanyInfo);
       return company;
-    }catch(error){
-      throw { status: 400, message: error.errors[0].message};
+    } catch (error) {
+      throw { status: 400, message: error.errors[0].message };
     }
   }
   async getIdByCpfCnpj(CompanyInfo) {

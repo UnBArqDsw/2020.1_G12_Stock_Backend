@@ -13,7 +13,7 @@ class ColaboratorBase extends Base {
     if (collaboratorInfo.companyDocument) {
       const idCompany = await CompanyBase.getIdByCpfCnpj(collaboratorInfo);
       const collaborators = await this.listAll(idCompany);
-      try{
+      try {
         if (collaborators.length == 0) {
           collaboratorInfo.idCompany = idCompany;
           collaboratorInfo.idAccessLevel = 1;
@@ -25,8 +25,8 @@ class ColaboratorBase extends Base {
           const collaborator = await super.create(collaboratorInfo);
           return collaborator;
         }
-      }catch(error){
-        throw { status: 400, message: error.errors[0].message};
+      } catch (error) {
+        throw { status: 400, message: error.errors[0].message };
       }
     }
     const collaborator = await super.create(collaboratorInfo);
