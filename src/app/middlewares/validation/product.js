@@ -2,10 +2,9 @@ import Joi from '@hapi/joi';
 
 const ProductSchema = Joi.object({
   name: Joi.string().min(3).max(255).required(),
-
   unitQtd: Joi.number().integer().min(1).required(),
   unitMeasure: Joi.string().min(3).max(255).required(),
-  salePrice: Joi.number().min(1).required(),
+  salePrice: Joi.number().min(0.01).required(),
   categories: Joi.array(),
 });
 
