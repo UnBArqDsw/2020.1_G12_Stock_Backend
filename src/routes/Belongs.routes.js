@@ -15,6 +15,12 @@ routes.post(
 );
 
 routes.get(
+  PATH + '/productsByCategory',
+  AuthorizationMiddleware,
+  BelongsController.indexCategories
+);
+
+routes.get(
   PATH + '/:idProduct',
   AuthorizationMiddleware,
   BelongsController.index
