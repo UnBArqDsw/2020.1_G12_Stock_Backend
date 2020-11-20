@@ -2,6 +2,7 @@ import Base from './Base';
 import hashPass from '../../utils/hashPass';
 import CollaboratorModel from '../models/Collaborator';
 import CompanyBase from '../StockBase/CompanyBase';
+import Company from '../models/Company';
 
 class ColaboratorBase extends Base {
   constructor() {
@@ -44,12 +45,32 @@ class ColaboratorBase extends Base {
   }
 
   async listCollaborator(idCollaborator) {
-    const collaborator = await super.findOne({ where: { idCollaborator } });
+    const collaborator = await super.findOne({
+      where: {
+        idCollaborator,
+      },
+      include: [
+        {
+          model: Company,
+          as: 'Company',
+          attributes: ['name'],
+        },
+      ],
+    });
     return collaborator;
   }
 
   async auth(document, password) {
-    const collaborator = await super.findOne({ where: { document } });
+    const collaborator = await super.findOne({
+      where: { document },
+      include: [
+        {
+          model: Company,
+          as: 'Company',
+          attributes: ['name'],
+        },
+      ],
+    });
 
     if (collaborator.dataValues.activate == false)
       throw { status: 403, message: 'Usuário não autorizado' };
