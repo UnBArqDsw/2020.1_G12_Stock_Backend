@@ -52,8 +52,13 @@ class ProductController {
   async decrease(req, res) {
     try {
       const response = await ProductBase.decrease(req.body, req.collaborator);
+
+      const clientsToUpdate = await findConnections(req.collaborator.idCompany);
+      sendMessage('update-product', clientsToUpdate, response);
+
       return res.json(response);
     } catch (error) {
+      console.log(error);
       return res.status(400).json({ message: error.message || error });
     }
   }

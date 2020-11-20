@@ -12,7 +12,7 @@ class CategoryModel extends Model {
         },
         idCompany: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
           references: {
             model: 'companies',
             key: 'idCompany',
