@@ -29,7 +29,17 @@ class ColaboratorBase extends Base {
   }
 
   async listAll(idCompany) {
-    const collaborators = await super.findAll({ where: { idCompany } });
+    const collaborators = await super.findAll({
+      where: { idCompany },
+      attributes: [
+        'idCollaborator',
+        'name',
+        'idCompany',
+        'document',
+        'email',
+        'activate',
+      ],
+    });
     return collaborators;
   }
 

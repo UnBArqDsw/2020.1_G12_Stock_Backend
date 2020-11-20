@@ -17,11 +17,7 @@ class CollaboratorController {
     try {
       const collaborators = await CollaboratorBase.listAll(idCompany);
 
-      return res.json(
-        collaborators.map((collaborators) =>
-          _.omit(collaborators.dataValues, ['password'])
-        )
-      );
+      return res.json(collaborators);
     } catch (error) {
       return res.status(400).json({ message: error.message || error });
     }
@@ -42,6 +38,27 @@ class CollaboratorController {
       return res
         .status(200)
         .json(_.omit(collaborator.dataValues, ['password']));
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
+  async find(req, res) {
+    const { idCollaborator } = req.collaborator;
+    try {
+      const response = await CollaboratorBase.findOne({ idCollaborator });
+      console.log(response.dataValues);
+      return res.json(
+        _.pick(response.dataValues, [
+          'idCollaborator',
+          'idAccessLevel',
+          'idCompany',
+          'name',
+          'photo',
+        ])
+      );
     } catch (error) {
       return res
         .status(error.status || 400)

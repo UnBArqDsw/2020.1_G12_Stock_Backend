@@ -12,21 +12,22 @@ class ProductBase extends Base {
     this.DecreasesBase = DecreasesBase;
   }
 
-  async update(ProductInfo) {
+  async updateProductLotQuantity(ProductInfo) {
     const idProduct = ProductInfo.idProduct;
     const lots = await this.LotBase.findAll({ idProduct });
     var quantity = 0;
     for (const lot of lots) {
       quantity += lot.productQty;
     }
-    const product = {
-      idProduct: idProduct,
-      quantity: quantity,
-    };
-    const updated_product = super.update(product, {
+
+    const product_to_update = await super.findOne({
       where: { idProduct: idProduct },
     });
-    return updated_product;
+
+    product_to_update.quantity = quantity;
+    product_to_update.save();
+
+    return product_to_update;
   }
 
   async create(ProductInfo, CollaboratorInfo) {
@@ -35,7 +36,7 @@ class ProductBase extends Base {
     body.idCompany = CollaboratorInfo.idCompany;
     let product = await super.create(body);
 
-    if (product && ProductInfo.categories.length) {
+    if (product && ProductInfo.categories) {
       await BelongsBase.create({
         idProduct: product.idProduct,
         idCategory: ProductInfo.categories,
@@ -93,10 +94,13 @@ class ProductBase extends Base {
     try {
       current_product_quantity = product.dataValues.quantity;
     } catch (error) {
-      throw Error('Produto não encontrado.');
+      throw { status: 404, message: 'Produto não encontrado.' };
     }
     if (quantity > current_product_quantity) {
-      throw Error('Quantidade indisponível para decremento.');
+      throw {
+        status: 400,
+        message: 'Quantidade indisponível para decremento.',
+      };
     }
     for (const lot of lots) {
       let current_quantity = lot.productQty;
@@ -133,10 +137,14 @@ class ProductBase extends Base {
       }
     }
 
-    await this.update({ idProduct: idProduct });
-    const updated_product = await super.findOne({
-      where: { idProduct: idProduct },
+    const updated_product = await this.updateProductLotQuantity({
+      idProduct: idProduct,
     });
+
+    const productLots = await this.LotBase.findAll({ idProduct });
+
+    updated_product.dataValues.lots = productLots;
+
     return updated_product;
   }
 }

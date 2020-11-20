@@ -16,6 +16,7 @@ routes.get(
   CollaboratorController.index
 );
 
+routes.get(PATH, AuthorizationMiddleware, CollaboratorController.find);
 routes.get(
   PATH + '/:idCollaborator',
   AuthorizationMiddleware,
