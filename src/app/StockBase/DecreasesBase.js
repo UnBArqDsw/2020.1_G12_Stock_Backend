@@ -4,6 +4,8 @@ import LotBase from '../StockBase/LotBase';
 import Lot from '../models/Lot';
 import Product from '../models/Product';
 import Collaborator from '../models/Collaborator';
+import moment from 'moment';
+import { Op } from 'sequelize';
 
 class DecreasesBase extends Base {
   constructor() {
@@ -51,11 +53,66 @@ class DecreasesBase extends Base {
   }
 
   async listDaySales(date) {
-    console.log(date);
     const decreases = await super.findAll({
       where: { idDecreasesType: 2, date },
     });
     return decreases;
+  }
+
+  async getDecreasesByWeek(idDecreasesType) {
+    let data = [
+      {
+        name: 'dom',
+        vendas: 0,
+      },
+      {
+        name: 'seg',
+        vendas: 0,
+      },
+      {
+        name: 'ter',
+        vendas: 0,
+      },
+      {
+        name: ' qua',
+        vendas: 0,
+      },
+      {
+        name: 'qui',
+        vendas: 0,
+      },
+      {
+        name: 'sex',
+        vendas: 0,
+      },
+      {
+        name: 'sab',
+        vendas: 0,
+      },
+    ];
+
+    const dayOfTheWeek = moment().day();
+
+    const decreases = await super.findAll({
+      where: {
+        idDecreasesType,
+        date: {
+          [Op.between]: [
+            moment().subtract(dayOfTheWeek, 'days').format(),
+            moment()
+              .add(6 - dayOfTheWeek, 'days')
+              .format(),
+          ],
+        },
+      },
+    });
+
+    decreases.forEach((decrease) => {
+      const decreaseDay = moment(decrease.date).day();
+      data[decreaseDay].vendas += decrease.quantity;
+    });
+
+    return data;
   }
 }
 

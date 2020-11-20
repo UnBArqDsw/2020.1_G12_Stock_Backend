@@ -30,7 +30,6 @@ class DecreasesController {
     const month = moment().format('MMM');
 
     try {
-      console.log(moment().endOf('month').format('DD'));
       for (let i = 0; i < moment().endOf('month').format('DD'); i++) {
         i < 9
           ? (date = `${moment().format('YYYY')}-${moment().format('MM')}-0${
@@ -46,6 +45,19 @@ class DecreasesController {
         });
       }
       return res.json(salesData);
+    } catch (error) {
+      return res
+        .status(error.status || 400)
+        .json({ message: error.message || error });
+    }
+  }
+
+  async getDecreasesByWeek(req, res) {
+    try {
+      const { idDecreasesType } = req.query;
+
+      const decreases = await DecreasesBase.getDecreasesByWeek(idDecreasesType);
+      return res.json(decreases);
     } catch (error) {
       return res
         .status(error.status || 400)
