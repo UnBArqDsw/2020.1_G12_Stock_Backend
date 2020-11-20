@@ -64,6 +64,7 @@ class CollaboratorController {
             'name',
             'document',
             'photo',
+            'Company',
           ])
         );
     } catch (error) {

@@ -13,7 +13,14 @@ class CollaboratorModel extends Model {
           autoIncrement: true,
         },
         idAccessLevel: Sequelize.NUMBER,
-        idCompany: Sequelize.NUMBER,
+        idCompany: {
+          type: Sequelize.NUMBER,
+          references: {
+            model: 'companies',
+            key: 'idCompany',
+          },
+          primaryKey: true,
+        },
         name: Sequelize.STRING,
         document: Sequelize.STRING,
         activate: Sequelize.BOOLEAN,
