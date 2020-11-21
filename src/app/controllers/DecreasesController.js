@@ -29,7 +29,7 @@ class DecreasesController {
     let salesData = [];
     let date = '';
     const month = moment().format('MMM');
-    const {idCompany} = req.collaborator;
+    const { idCompany } = req.collaborator;
     try {
       for (let i = 0; i < moment().endOf('month').format('DD'); i++) {
         i < 9
@@ -57,7 +57,10 @@ class DecreasesController {
     try {
       const { idDecreasesType } = req.query;
       const { idCompany } = req.collaborator;
-      const decreases = await DecreasesBase.getDecreasesByWeek(idDecreasesType, idCompany);
+      const decreases = await DecreasesBase.getDecreasesByWeek(
+        idDecreasesType,
+        idCompany
+      );
       return res.json(decreases);
     } catch (error) {
       return res
