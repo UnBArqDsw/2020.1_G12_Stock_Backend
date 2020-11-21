@@ -38,5 +38,4 @@ routes.put(
   AccessLevelMiddleware,
   CollaboratorController.updateCollaborator
 );
-
 export default routes;

@@ -13,9 +13,10 @@ class DecreasesController {
 
   async index(req, res) {
     const { idDecreasesType } = req.params;
+    const { idCompany } = req.collaborator;
     try {
-      const decreases = await DecreasesBase.listAll(idDecreasesType);
-
+      const decreases = await DecreasesBase.listAll(idDecreasesType, idCompany);
+      console.log(decreases);
       return res.json(decreases);
     } catch (error) {
       return res
@@ -28,7 +29,7 @@ class DecreasesController {
     let salesData = [];
     let date = '';
     const month = moment().format('MMM');
-
+    const {idCompany} = req.collaborator;
     try {
       for (let i = 0; i < moment().endOf('month').format('DD'); i++) {
         i < 9
@@ -38,7 +39,7 @@ class DecreasesController {
           : (date = `${moment().format('YYYY')}-${moment().format('MM')}-${
               i + 1
             }T00:00:00.000Z`);
-        let decreases = await DecreasesBase.listDaySales(date);
+        let decreases = await DecreasesBase.listDaySales(date, idCompany);
         salesData.push({
           name: i + 1 + ' ' + month,
           Vendas: decreases.length,
@@ -55,8 +56,8 @@ class DecreasesController {
   async getDecreasesByWeek(req, res) {
     try {
       const { idDecreasesType } = req.query;
-
-      const decreases = await DecreasesBase.getDecreasesByWeek(idDecreasesType);
+      const { idCompany } = req.collaborator;
+      const decreases = await DecreasesBase.getDecreasesByWeek(idDecreasesType, idCompany);
       return res.json(decreases);
     } catch (error) {
       return res
