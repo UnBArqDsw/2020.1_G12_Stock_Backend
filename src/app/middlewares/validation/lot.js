@@ -3,10 +3,10 @@ import Joi from '@hapi/joi';
 const LotSchema = Joi.object({
   entryDate: Joi.date().required(),
   dueDate: Joi.date().required(),
-  productQty: Joi.number().integer().required(),
+  productQty: Joi.number().integer().required().min(1),
   description: Joi.string().required(),
-  purchasePrice: Joi.number().required(),
-  idProduct: Joi.number().integer().required(),
+  purchasePrice: Joi.number().required().min(0.01),
+  idProduct: Joi.number().integer().required().min(1),
 });
 
 const validateLotBody = (req, res, next) => {

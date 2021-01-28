@@ -4,6 +4,7 @@ import LotBase from '../StockBase/LotBase';
 import Lot from '../models/Lot';
 import Product from '../models/Product';
 import Collaborator from '../models/Collaborator';
+import CollaboratorBase from '../StockBase/CollaboratorBase';
 import moment from 'moment';
 import { Op } from 'sequelize';
 
@@ -25,7 +26,7 @@ class DecreasesBase extends Base {
     return decreases;
   }
 
-  async listAll(idDecreasesType) {
+  async listAll(idDecreasesType, idCompany) {
     const decreases = await super.findAll({
       where: { idDecreasesType },
       include: [
@@ -49,17 +50,37 @@ class DecreasesBase extends Base {
       ],
       order: [['date', 'DESC']],
     });
-    return decreases;
+    const companyCollaborators = await CollaboratorBase.findAll({
+      where: { idCompany },
+    });
+    const collaboratorsId = companyCollaborators.map(
+      (collaborator) => collaborator.dataValues.idCollaborator
+    );
+
+    const decreasesPerCompany = decreases.filter((decrease) =>
+      collaboratorsId.includes(decrease.dataValues.idCollaborator)
+    );
+    return decreasesPerCompany;
   }
 
-  async listDaySales(date) {
+  async listDaySales(date, idCompany) {
     const decreases = await super.findAll({
       where: { idDecreasesType: 2, date },
     });
-    return decreases;
+    const companyCollaborators = await CollaboratorBase.findAll({
+      where: { idCompany },
+    });
+    const collaboratorsId = companyCollaborators.map(
+      (collaborator) => collaborator.dataValues.idCollaborator
+    );
+
+    const decreasesPerCompany = decreases.filter((decrease) =>
+      collaboratorsId.includes(decrease.dataValues.idCollaborator)
+    );
+    return decreasesPerCompany;
   }
 
-  async getDecreasesByWeek(idDecreasesType) {
+  async getDecreasesByWeek(idDecreasesType, idCompany) {
     let data = [
       {
         name: 'dom',
@@ -107,7 +128,18 @@ class DecreasesBase extends Base {
       },
     });
 
-    decreases.forEach((decrease) => {
+    const companyCollaborators = await CollaboratorBase.findAll({
+      where: { idCompany },
+    });
+    const collaboratorsId = companyCollaborators.map(
+      (collaborator) => collaborator.dataValues.idCollaborator
+    );
+
+    const decreasesPerCompany = decreases.filter((decrease) =>
+      collaboratorsId.includes(decrease.dataValues.idCollaborator)
+    );
+
+    decreasesPerCompany.forEach((decrease) => {
       const decreaseDay = moment(decrease.date).day();
       data[decreaseDay].vendas += decrease.quantity;
     });
