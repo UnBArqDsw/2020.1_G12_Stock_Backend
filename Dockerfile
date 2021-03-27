@@ -9,4 +9,4 @@ RUN yarn install
 
 COPY ./ ./
 
-CMD ["yarn", "start"]
+CMD ["entrypoint.sh"]
