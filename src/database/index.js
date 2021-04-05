@@ -41,7 +41,7 @@ class Database {
   }
 
   initRedisDB() {
-    this.redisClient = redis.createClient(redisConfig);
+    this.redisClient = redis.createClient(redisConfig.PORT, redisConfig.HOST);
     this.redisClient.on('connect', () => {
       console.log('Redis connected!');
     });
